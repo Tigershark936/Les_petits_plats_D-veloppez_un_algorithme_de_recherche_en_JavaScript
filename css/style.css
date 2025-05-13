@@ -1,0 +1,179 @@
+*, ::after, ::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 1440px;
+}
+
+.header {
+  width: 1440px;
+  height: 667px;
+  background-image: url("../assets/pictures/f90e7bb5ff2950597c1f7f1fce40bd5b03a3d836.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.header h1 img.logo {
+  height: 25.26px;
+}
+.header h2 {
+  color: #ffd15b;
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  padding-top: 245px;
+  font-size: 2.75rem;
+  text-align: center;
+}
+.header .search-bar {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 29px;
+}
+.header .search-bar input {
+  width: 100%;
+  max-width: 954px;
+  height: 72px;
+  border-radius: 11px;
+  padding-left: 35px;
+  border: none;
+  font-family: "Manrope", sans-serif;
+}
+.header .search-bar button {
+  position: absolute;
+  top: 10px;
+  right: calc((100% - 954px) / 2 + 10px);
+  width: 51px;
+  height: 52px;
+  background-color: #1B1B1B;
+  border-radius: 10px;
+  color: #ffffff;
+}
+.header .search-bar button .fa-solid, .header .search-bar button .fa-magnifying-glass {
+  font-size: 20px;
+}
+
+.main {
+  padding: 21px 102px 201px 104px;
+  background-color: #e5e5e5;
+}
+.main .filters-Counter {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 55px;
+}
+.main .filters-Counter .filters {
+  display: flex;
+  gap: 65px;
+}
+.main .filters-Counter .filters .button-filters {
+  width: 195px;
+  height: 56px;
+  font-family: "Manrope", sans-serif;
+  background-color: #ffffff;
+  border-radius: 11px;
+  padding: 17px 25px 17px 16px;
+  border: none;
+  cursor: pointer;
+}
+.main .filters-Counter .filters .button-filters p {
+  font-size: 1rem;
+}
+.main .filters-Counter .filters .button-filters .text-symbol {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main .filters-Counter .counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main .filters-Counter .counter h3 {
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+}
+.main .recipe-card {
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+  height: 731px;
+  background-color: #ffffff;
+  border-radius: 21px;
+}
+.main .recipe-card .card-img {
+  width: 100%;
+  display: flex;
+  position: relative;
+}
+.main .recipe-card .card-img .time-recipe {
+  position: absolute;
+  top: 21px;
+  right: 22px;
+  width: 63px;
+  height: 26px;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.75rem;
+  background-color: #ffd15b;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main .recipe-card .card-img img {
+  width: 100%;
+  height: 253px;
+  margin-bottom: 32px;
+  border-radius: 21px 21px 0 0;
+  object-fit: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("../../assets/pictures/f90e7bb5ff2950597c1f7f1fce40bd5b03a3d836.jpg");
+}
+.main .recipe-card h4 {
+  margin: 0 25px;
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  margin-bottom: 29px;
+}
+.main .recipe-card .recipe-text {
+  margin: 0 25px;
+}
+.main .recipe-card .recipe-text h5 {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: #7a7a7a;
+  margin-bottom: 15px;
+}
+.main .recipe-card .recipe-text .recipe-description {
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  margin-bottom: 32px;
+}
+.main .recipe-card .recipe-text ul {
+  list-style: none;
+}
+.main .recipe-card .recipe-text ul li {
+  flex: 1 1;
+}
+.main .recipe-card .recipe-text ul li .ingredient {
+  font-size: 0.875rem;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+}
+.main .recipe-card .recipe-text ul li .quantity {
+  color: #7a7a7a;
+  font-size: 0.875rem;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+}
+
+/*# sourceMappingURL=style.css.map */
