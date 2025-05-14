@@ -6,6 +6,8 @@ Header.setAttribute('role', 'banner'); // Zone de l'en-tête
 document.body.appendChild(Header);
 console.log(Header);
 
+// const backgroundHeader = document.createElement('')
+
 //H1 LOGO DU SITE 
 const h1 = document.createElement('h1');
 const logoWebsite = document.createElement('img');
@@ -188,31 +190,44 @@ recipeDescription.classList.add('recipe-description');
 recipeDescription.textContent = `Mettre les glaçons à votre goût dans le blender, Ajouter le lait  la crème de coco, le jus de 2 citrons et le sucre ensemble. Mixer jusqu'à obtenir la consistance désirée.`;
 recipeText.appendChild(recipeDescription);
 
+const boxContainerIngredients = document.createElement('div');
+boxContainerIngredients.classList.add('box-container-ingredients');
+recipeText.appendChild(boxContainerIngredients);
+
 const titleIngredients = document.createElement('h5');
 titleIngredients.classList.add('h5');
 titleIngredients.textContent = `INGRÉDIENTS`;
-recipeText.appendChild(titleIngredients);
+boxContainerIngredients.appendChild(titleIngredients);
 
 const listIngredients = document.createElement('ul');
 listIngredients.classList.add('ul');
 listIngredients.setAttribute('aria-label', 'Liste des ingrédients de la recette');
 listIngredients.setAttribute('role', 'list'); 
-recipeText.appendChild(listIngredients);
+boxContainerIngredients.appendChild(listIngredients);
 
-const ingredientItem = document.createElement('li');
-ingredientItem.classList.add('li');
-ingredientItem.setAttribute('aria-label', 'ingrédient : ....');
-ingredientItem.setAttribute('role', 'listitem');
-listIngredients.appendChild(ingredientItem);
+const ingredientsData = [
+    { name: 'Lait de coco', quantity: '400ml' },
+    { name: 'Crème de coco', quantity: '4 cuillères' },
+    { name: 'Glaçons', quantity: '2' },
+    { name: 'Jus de citron', quantity: '2' },
+    { name: 'Sucre', quantity: '20g' },
+];
 
-const ingredient = document.createElement('p');
-ingredient.classList.add('ingredient');
-ingredient.textContent = `Lait de coco`;
-ingredient.setAttribute('aria-label', "Nom de l'ingrédient");
-ingredientItem.appendChild(ingredient);
+ingredientsData.forEach(({ name, quantity }) => {
+    const ingredientItem = document.createElement('li');
+    ingredientItem.classList.add('li');
+    ingredientItem.setAttribute('role', 'listitem');
+    listIngredients.appendChild(ingredientItem);
 
-const ingredientQuantity = document.createElement('p');
-ingredientQuantity.classList.add('quantity');
-ingredientQuantity.textContent = `400ml`;
-ingredientQuantity.setAttribute('aria-label', "Quantité de l'ingrédient");
-ingredientItem.appendChild(ingredientQuantity);
+    const ingredient = document.createElement('p');
+    ingredient.classList.add('ingredient');
+    ingredient.setAttribute('aria-label', `Nom de l'ingrédient : ${name}`);
+    ingredient.textContent = `${name}`;
+    ingredientItem.appendChild(ingredient);
+
+    const ingredientQuantity = document.createElement('p');
+    ingredientQuantity.classList.add('quantity');
+    ingredientQuantity.setAttribute('aria-label', `Quantité de l'ingrédient : ${quantity}`);
+    ingredientQuantity.textContent = `${quantity}`;
+    ingredientItem.appendChild(ingredientQuantity);
+});

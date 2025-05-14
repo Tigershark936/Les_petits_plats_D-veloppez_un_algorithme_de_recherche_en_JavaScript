@@ -8,8 +8,9 @@ body{
 
 .header{
     width: 1440px;
-    // height: 100%;
+    height: 100%;
     height: 667px;
+    position: relative;
     background-image: url('../assets/pictures/f90e7bb5ff2950597c1f7f1fce40bd5b03a3d836.jpg');
     background-size: cover;
     background-position: center;
@@ -18,6 +19,9 @@ body{
     h1{
 
         img.logo {
+            position: absolute;
+            top: 51px;
+            left: 69px;
             height: 25.26px;
         }
     }
@@ -178,23 +182,37 @@ body{
                 margin-bottom: 32px;
             }
 
-            ul{
-                list-style: none;
+            .box-container-ingredients{
+                width: 330px;
+                height: 190px;
 
-                li {
-                    flex: 1 1;
+                ul{
+                    list-style: none;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-template-rows: repeat(3, auto);
+                    grid-auto-flow: column;
+                    padding: 0;
+                    margin: 0;
+                    gap: 29px;
+                    background: rgba(0, 255, 0, 0.1);
 
-                    .ingredient{
-                        font-size: 0.875rem;
-                        font-family: $font-text;
-                        font-weight: 400;
-                    }
+                    li {
+                        height: 39px;
+                        background: rgba(255, 0, 0, 0.1);
 
-                    .quantity{
-                        color: $primary-color;
-                        font-size: 0.875rem;
-                        font-family: $font-text;
-                        font-weight: 400;
+                        .ingredient{
+                            font-size: 0.875rem;
+                            font-family: $font-text;
+                            font-weight: 400;
+                        }
+
+                        .quantity{
+                            color: $primary-color;
+                            font-size: 0.875rem;
+                            font-family: $font-text;
+                            font-weight: 400;
+                        }
                     }
                 }
             }
