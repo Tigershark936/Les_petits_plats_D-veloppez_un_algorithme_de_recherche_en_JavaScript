@@ -48,7 +48,19 @@ body {
   border-radius: 11px;
   padding-left: 35px;
   border: none;
+  outline: none;
   font-family: "Manrope", sans-serif;
+  color: #7a7a7a;
+  caret-color: #7a7a7a;
+  cursor: pointer;
+}
+.header .search-bar .cross-btn {
+  position: absolute;
+  top: 25px;
+  right: calc((100% - 954px) / 2 + 85px);
+  font-size: 24px;
+  color: red;
+  z-index: 2;
 }
 .header .search-bar button {
   position: absolute;
@@ -59,13 +71,16 @@ body {
   background-color: #1B1B1B;
   border-radius: 10px;
   color: #ffffff;
+  cursor: pointer;
 }
 .header .search-bar button .fa-solid, .header .search-bar button .fa-magnifying-glass {
   font-size: 20px;
 }
 
 .main {
-  padding: 21px 102px 201px 104px;
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 21px 100px 201px 100px;
   background-color: #e5e5e5;
 }
 .main .filters-Counter {
@@ -77,23 +92,56 @@ body {
   display: flex;
   gap: 65px;
 }
-.main .filters-Counter .filters .button-filters {
+.main .filters-Counter .filters .button-filter {
   width: 195px;
   height: 56px;
   font-family: "Manrope", sans-serif;
   background-color: #ffffff;
   border-radius: 11px;
-  padding: 17px 25px 17px 16px;
   border: none;
   cursor: pointer;
 }
-.main .filters-Counter .filters .button-filters p {
+.main .filters-Counter .filters .button-filter p {
   font-size: 1rem;
 }
-.main .filters-Counter .filters .button-filters .text-symbol {
+.main .filters-Counter .filters .button-filter .text-symbol {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 17px 25px 17px 16px;
+}
+.main .filters-Counter .filters .button-filter .search-element-filter {
+  width: 195px;
+  height: 268px;
+  background-color: #ffffff;
+  border-radius: 0 0 11px 11px;
+  position: absolute;
+  z-index: 5;
+}
+.main .filters-Counter .filters .button-filter .search-element-filter .ingredients-list {
+  list-style-type: none;
+  text-align: left;
+  padding-left: 0;
+  cursor: pointer;
+}
+.main .filters-Counter .filters .button-filter .search-element-filter .search-bar-and-glass {
+  position: relative;
+}
+.main .filters-Counter .filters .button-filter .search-element-filter input {
+  width: 163px;
+  height: 36px;
+  margin-top: 14px;
+  padding-left: 9px;
+  border: none;
+  outline: none;
+  color: #7a7a7a;
+  caret-color: rgb(198, 198, 198);
+  border: solid 1px rgb(198, 198, 198);
+}
+.main .filters-Counter .filters .button-filter .search-element-filter i {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 .main .filters-Counter .counter {
   display: flex;
@@ -104,7 +152,12 @@ body {
   font-family: "Anton", sans-serif;
   font-weight: 400;
 }
-.main .recipe-card {
+.main .container-recipe-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+}
+.main .container-recipe-card .recipe-card {
   display: flex;
   flex-direction: column;
   width: 380px;
@@ -112,12 +165,12 @@ body {
   background-color: #ffffff;
   border-radius: 21px;
 }
-.main .recipe-card .card-img {
+.main .container-recipe-card .recipe-card .card-img {
   width: 100%;
   display: flex;
   position: relative;
 }
-.main .recipe-card .card-img .time-recipe {
+.main .container-recipe-card .recipe-card .card-img .time-recipe {
   position: absolute;
   top: 21px;
   right: 22px;
@@ -131,43 +184,44 @@ body {
   justify-content: center;
   align-items: center;
 }
-.main .recipe-card .card-img img {
+.main .container-recipe-card .recipe-card .card-img img {
   width: 100%;
   height: 253px;
   margin-bottom: 32px;
   border-radius: 21px 21px 0 0;
   object-fit: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url("../../assets/pictures/f90e7bb5ff2950597c1f7f1fce40bd5b03a3d836.jpg");
 }
-.main .recipe-card h4 {
+.main .container-recipe-card .recipe-card h4 {
   margin: 0 25px;
   font-family: "Anton", sans-serif;
   font-weight: 400;
   margin-bottom: 29px;
 }
-.main .recipe-card .recipe-text {
+.main .container-recipe-card .recipe-card .recipe-text {
   margin: 0 25px;
 }
-.main .recipe-card .recipe-text h5 {
+.main .container-recipe-card .recipe-card .recipe-text h5 {
   font-family: "Manrope", sans-serif;
   font-weight: 700;
   font-size: 0.75rem;
   color: #7a7a7a;
   margin-bottom: 15px;
 }
-.main .recipe-card .recipe-text .recipe-description {
+.main .container-recipe-card .recipe-card .recipe-text .recipe-description {
+  height: 76px;
   font-family: "Manrope", sans-serif;
   font-weight: 400;
   font-size: 0.875rem;
   margin-bottom: 32px;
+  position: relative;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
-.main .recipe-card .recipe-text .box-container-ingredients {
+.main .container-recipe-card .recipe-card .recipe-text .box-container-ingredients {
   width: 330px;
   height: 190px;
 }
-.main .recipe-card .recipe-text .box-container-ingredients ul {
+.main .container-recipe-card .recipe-card .recipe-text .box-container-ingredients ul {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -178,16 +232,16 @@ body {
   gap: 29px;
   background: rgba(0, 255, 0, 0.1);
 }
-.main .recipe-card .recipe-text .box-container-ingredients ul li {
+.main .container-recipe-card .recipe-card .recipe-text .box-container-ingredients ul li {
   height: 39px;
   background: rgba(255, 0, 0, 0.1);
 }
-.main .recipe-card .recipe-text .box-container-ingredients ul li .ingredient {
+.main .container-recipe-card .recipe-card .recipe-text .box-container-ingredients ul li .ingredient {
   font-size: 0.875rem;
   font-family: "Manrope", sans-serif;
   font-weight: 400;
 }
-.main .recipe-card .recipe-text .box-container-ingredients ul li .quantity {
+.main .container-recipe-card .recipe-card .recipe-text .box-container-ingredients ul li .quantity {
   color: #7a7a7a;
   font-size: 0.875rem;
   font-family: "Manrope", sans-serif;

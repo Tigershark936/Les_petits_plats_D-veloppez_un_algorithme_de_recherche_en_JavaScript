@@ -50,7 +50,20 @@ body{
             border-radius: 11px;
             padding-left: 35px;
             border: none;
+            outline: none;
             font-family: $font-text;
+            color: $primary-color;
+            caret-color:$primary-color;
+            cursor: pointer;
+        }
+
+        .cross-btn{
+            position: absolute;
+            top: 25px;
+            right: calc((100% - 954px) / 2 + 85px);
+            font-size: 24px;
+            color:red;
+            z-index: 2;
         }
         
         button{
@@ -62,6 +75,7 @@ body{
             background-color: $secondary-background-color;
             border-radius: 10px;
             color:$fourth-background-color;
+            cursor: pointer;
 
             .fa-solid, .fa-magnifying-glass{
                 font-size: 20px; 
@@ -71,7 +85,9 @@ body{
 }
 
 .main{
-    padding: 21px 102px 201px 104px;
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 21px 100px 201px 100px;
     background-color: $tertiary-background-color;
 
     .filters-Counter{
@@ -83,24 +99,62 @@ body{
             display: flex; 
             gap: 65px;
 
-            .button-filters{
-            width: 195px;
-            height: 56px;
-            font-family: $font-text;
-            background-color: $fourth-background-color;
-            border-radius: 11px;
-            padding: 17px 25px 17px 16px;
-            border: none;
-            cursor: pointer;
+            .button-filter{
+                width: 195px;
+                height: 56px;
+                font-family: $font-text;
+                background-color: $fourth-background-color;
+                border-radius: 11px;
+                border: none;
+                cursor: pointer;
 
-            p{
-                font-size: 1rem;
-            }
+                p{
+                    font-size: 1rem;
+                }
 
-            .text-symbol {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+                .text-symbol {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding: 17px 25px 17px 16px;
+                }
+
+                .search-element-filter{
+                width: 195px;
+                height: 268px;
+                background-color: $fourth-background-color;
+                border-radius: 0 0 11px 11px;
+                position: absolute; 
+                z-index: 5;
+
+                    .ingredients-list{
+                        list-style-type: none;
+                        text-align: left;
+                        padding-left: 0;
+                        cursor: pointer;
+                        }
+
+                    .search-bar-and-glass {
+                        position: relative;
+                    }
+
+                    input {
+                        width: 163px;
+                        height: 36px;
+                        margin-top: 14px;
+                        padding-left: 9px;
+                        border: none;
+                        outline: none;
+                        color: $primary-color;
+                        caret-color: rgba(198, 198, 198, 1);
+                        border: solid 1px rgba(198, 198, 198, 1);
+                    }
+
+                    i {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                    }
                 }
             }
         }
@@ -116,102 +170,110 @@ body{
             }
         }
     }
-
-    .recipe-card{
+    
+    .container-recipe-card{
         display: flex;
-        flex-direction: column;
-        width: 380px;
-        height: 731px;
-        background-color: $fourth-background-color;
-        border-radius: 21px;
+        flex-wrap: wrap;
+        gap: 48px;
+        
 
-        .card-img{
-            width: 100%;
+            .recipe-card{
             display: flex;
-            position: relative;
+            flex-direction: column; 
+            width: 380px;
+            height: 731px;
+            background-color: $fourth-background-color;
+            border-radius: 21px;
 
-            .time-recipe{
-                position: absolute;
-                top: 21px;
-                right: 22px;
-                width: 63px;
-                height: 26px;
-                font-family: $font-text;
-                font-size: 0.75rem;
-                background-color: $primary-background-color;
-                border-radius: 14px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            img{
+            .card-img{
                 width: 100%;
-                height: 253px;
-                margin-bottom: 32px;
-                border-radius: 21px 21px 0 0;
-                object-fit: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-image: url('../../assets/pictures/f90e7bb5ff2950597c1f7f1fce40bd5b03a3d836.jpg');
+                display: flex;
+                position: relative;
+
+                .time-recipe{
+                    position: absolute;
+                    top: 21px;
+                    right: 22px;
+                    width: 63px;
+                    height: 26px;
+                    font-family: $font-text;
+                    font-size: 0.75rem;
+                    background-color: $primary-background-color;
+                    border-radius: 14px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                img{
+                    width: 100%;
+                    height: 253px;
+                    margin-bottom: 32px;
+                    border-radius: 21px 21px 0 0;
+                    object-fit: cover;
+                }
             }
-        }
 
-        h4{
-            margin: 0 25px;
-            font-family: $font-title;
-            font-weight: 400;
-            margin-bottom: 29px;
-        }
-
-        .recipe-text{
-            margin: 0 25px;
-
-            h5{
-                font-family: $font-text;
-                font-weight: 700;
-                font-size: 0.75rem;
-                color: $primary-color;
-                margin-bottom: 15px;
-            }   
-
-            .recipe-description{
-                font-family: $font-text;
+            h4{
+                margin: 0 25px;
+                font-family: $font-title;
                 font-weight: 400;
-                font-size: 0.875rem;
-                margin-bottom: 32px;
+                margin-bottom: 29px;
             }
 
-            .box-container-ingredients{
-                width: 330px;
-                height: 190px;
+            .recipe-text{
+                margin: 0 25px;
 
-                ul{
-                    list-style: none;
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    grid-template-rows: repeat(3, auto);
-                    grid-auto-flow: column;
-                    padding: 0;
-                    margin: 0;
-                    gap: 29px;
-                    background: rgba(0, 255, 0, 0.1);
+                h5{
+                    font-family: $font-text;
+                    font-weight: 700;
+                    font-size: 0.75rem;
+                    color: $primary-color;
+                    margin-bottom: 15px;
+                }   
 
-                    li {
-                        height: 39px;
-                        background: rgba(255, 0, 0, 0.1);
+                .recipe-description{
+                    height: 76px;
+                    font-family: $font-text;
+                    font-weight: 400;
+                    font-size: 0.875rem;
+                    margin-bottom: 32px;
+                    position: relative;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
 
-                        .ingredient{
-                            font-size: 0.875rem;
-                            font-family: $font-text;
-                            font-weight: 400;
-                        }
+                .box-container-ingredients{
+                    width: 330px;
+                    height: 190px;
 
-                        .quantity{
-                            color: $primary-color;
-                            font-size: 0.875rem;
-                            font-family: $font-text;
-                            font-weight: 400;
+                    ul{
+                        list-style: none;
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        grid-template-rows: repeat(3, auto);
+                        grid-auto-flow: column;
+                        padding: 0;
+                        margin: 0;
+                        gap: 29px;
+                        background: rgba(0, 255, 0, 0.1);
+
+                        li {
+                            height: 39px;
+                            background: rgba(255, 0, 0, 0.1);
+
+                            .ingredient{
+                                font-size: 0.875rem;
+                                font-family: $font-text;
+                                font-weight: 400;
+                            }
+
+                            .quantity{
+                                color: $primary-color;
+                                font-size: 0.875rem;
+                                font-family: $font-text;
+                                font-weight: 400;
+                            }
                         }
                     }
                 }
