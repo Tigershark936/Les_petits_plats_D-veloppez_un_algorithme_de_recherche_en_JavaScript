@@ -1,0 +1,153 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.6">
+  <diagram name="Page-1" id="Q-Sq7VI3ArwNICJIUs-q">
+    <mxGraphModel dx="1554" dy="815" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="IHqs0nQ1DXyNlH6DscVg-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-1" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;The user writes at least 3 characters in the main search bar.&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="20" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="IHqs0nQ1DXyNlH6DscVg-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-3" value="&lt;font style=&quot;font-size: 13px;&quot;&gt;The user click the button or presses the &#39;enter&#39; key or the keyboard to search for the recipe.&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="120" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="IHqs0nQ1DXyNlH6DscVg-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-29" value="NO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IHqs0nQ1DXyNlH6DscVg-6">
+          <mxGeometry x="-0.0125" y="-2" relative="1" as="geometry">
+            <mxPoint x="10" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="IHqs0nQ1DXyNlH6DscVg-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="200" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-28" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IHqs0nQ1DXyNlH6DscVg-10">
+          <mxGeometry x="-0.0374" y="-3" relative="1" as="geometry">
+            <mxPoint y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="IHqs0nQ1DXyNlH6DscVg-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="640" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-15" value="NO&amp;nbsp;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IHqs0nQ1DXyNlH6DscVg-11">
+          <mxGeometry x="0.0376" y="2" relative="1" as="geometry">
+            <mxPoint y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-5" value="&lt;div style=&quot;line-height: 110%;&quot;&gt;&lt;font style=&quot;line-height: 110%; font-size: 14px;&quot;&gt;&lt;sub style=&quot;&quot;&gt;The text is present&lt;/sub&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;line-height: 110%; font-size: 14px;&quot;&gt;&lt;sub&gt;&amp;nbsp;in the title&amp;nbsp;&lt;/sub&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;line-height: 110%; font-size: 14px;&quot;&gt;&lt;sub style=&quot;&quot;&gt;of the recipe&lt;/sub&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="240" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="IHqs0nQ1DXyNlH6DscVg-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-30" value="NO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IHqs0nQ1DXyNlH6DscVg-8">
+          <mxGeometry x="-0.2495" y="1" relative="1" as="geometry">
+            <mxPoint x="9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="IHqs0nQ1DXyNlH6DscVg-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-31" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IHqs0nQ1DXyNlH6DscVg-13">
+          <mxGeometry x="0.0423" y="4" relative="1" as="geometry">
+            <mxPoint y="-14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-7" value="&lt;div style=&quot;line-height: 110%;&quot;&gt;&lt;font style=&quot;font-size: 14px; line-height: 110%;&quot;&gt;&lt;sub&gt;The text is present&lt;/sub&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px; line-height: 110%;&quot;&gt;&lt;sub&gt;&amp;nbsp;in the title&amp;nbsp;&lt;/sub&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px; line-height: 110%;&quot;&gt;&lt;sub&gt;of the recipe&lt;/sub&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="400" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="IHqs0nQ1DXyNlH6DscVg-9" target="IHqs0nQ1DXyNlH6DscVg-19">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="170" y="650" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="180" y="650" />
+              <mxPoint x="180" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-27" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IHqs0nQ1DXyNlH6DscVg-24">
+          <mxGeometry x="-0.0364" y="-4" relative="1" as="geometry">
+            <mxPoint x="-4" y="14" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="IHqs0nQ1DXyNlH6DscVg-9" target="IHqs0nQ1DXyNlH6DscVg-19">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="190" y="590" />
+              <mxPoint x="190" y="590" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-26" value="NO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IHqs0nQ1DXyNlH6DscVg-25">
+          <mxGeometry y="-1" relative="1" as="geometry">
+            <mxPoint y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-9" value="&lt;div style=&quot;line-height: 110%;&quot;&gt;&lt;font style=&quot;font-size: 14px; line-height: 110%;&quot;&gt;&lt;sub&gt;The text is present&lt;/sub&gt;&lt;/font&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px; line-height: 110%;&quot;&gt;&lt;sub&gt;&amp;nbsp;in the title&amp;nbsp;&lt;/sub&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 14px; line-height: 110%;&quot;&gt;&lt;sub&gt;of the recipe&lt;/sub&gt;&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="560" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="IHqs0nQ1DXyNlH6DscVg-12" target="IHqs0nQ1DXyNlH6DscVg-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-23" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IHqs0nQ1DXyNlH6DscVg-22">
+          <mxGeometry x="0.0575" y="1" relative="1" as="geometry">
+            <mxPoint x="-21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-12" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;The recipe is displayed in the recipe table list&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="IHqs0nQ1DXyNlH6DscVg-14" target="IHqs0nQ1DXyNlH6DscVg-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-21" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IHqs0nQ1DXyNlH6DscVg-20">
+          <mxGeometry x="-0.0327" y="1" relative="1" as="geometry">
+            <mxPoint x="19" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-14" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;The recipe is displayed in the recipe table list&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="430" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="IHqs0nQ1DXyNlH6DscVg-16">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="700" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-32" value="NO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="IHqs0nQ1DXyNlH6DscVg-17">
+          <mxGeometry x="0.063" y="-3" relative="1" as="geometry">
+            <mxPoint x="13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-16" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;No recipe has this text in the title&amp;nbsp;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="270" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-18" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Error message is displayed &quot;XXX&quot;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IHqs0nQ1DXyNlH6DscVg-19" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;We move on the next recipe&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="590" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
