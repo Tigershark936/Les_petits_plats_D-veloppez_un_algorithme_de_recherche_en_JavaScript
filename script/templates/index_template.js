@@ -1,6 +1,6 @@
 // Construction de la page index.html en dynamique
 import { recipes } from '../../data/recipes.js';
-import { createRecipeCard } from '../components/RecipeCard.js';
+import { createRecipeCard } from '../components/recipe-card.js';
 
 console.log(recipes);
 
@@ -29,7 +29,9 @@ Header.setAttribute('role', 'banner'); // Zone de l'en-tête
 document.body.appendChild(Header);
 console.log(Header);
 
-// const backgroundHeader = document.createElement('')
+const backgroundHeader = document.createElement('img');
+backgroundHeader.classList.add('background-img');
+Header.appendChild(backgroundHeader);
 
 //H1 LOGO DU SITE 
 const h1 = document.createElement('h1');
