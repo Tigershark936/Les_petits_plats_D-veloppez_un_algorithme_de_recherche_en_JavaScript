@@ -1,3 +1,11 @@
+import { recipes } from '../../data/recipes.js';
+
+// console.log(recipes);
+// console.log(recipes[0].ingredients);
+// console.log(recipes[0].appliance);
+// console.log(recipes.map(recipe => recipe.appliance));
+// console.log(recipes[0].ustensils);
+
 export function displayFilterIngredients(){
     // Création du filtre ingrédients
     const filterIngredients = document.createElement('button');
@@ -80,8 +88,27 @@ export function displayFilterIngredients(){
     searchBarAndMagnifyingGlass.appendChild(searchBarGlass);
 
     const ingredientsList = document.createElement("ul");
-    ingredientsList.classList.add('ingredients-list');
+    ingredientsList.classList.add('list-button');
     ingredientsSearch.appendChild(ingredientsList);
+
+    //va nour permettre d'éviter répétition des éléments dans la list. Le set est une collection d'éléments uniques
+    const ingredientsSet = new Set(); 
+
+    recipes.forEach(recipe => {
+        recipe.ingredients.forEach((ingredient) => {
+            // console.log('ingredient', ingredient);
+            // console.log(`|${ingredient.ingredient}|`);
+            const cleanIngredient = ingredient.ingredient.trim().toLowerCase();
+            ingredientsSet.add(cleanIngredient);
+        });
+    });
+
+    ingredientsSet.forEach((ingredient) => {
+        const ingredientsLi = document.createElement("li");
+        ingredientsLi.classList.add('element-filter-list');
+        ingredientsLi.textContent = ingredient;
+        ingredientsList.appendChild(ingredientsLi);
+    });
 
     return filterIngredients;
 }
@@ -161,17 +188,33 @@ export function displayFilterAppliances(){
     searchBarAndMagnifyingGlass.setAttribute("class", "search-bar-and-glass")
     appliancesSearch.appendChild(searchBarAndMagnifyingGlass);
 
-    const searchBarIngredients = document.createElement('input');
-    searchBarIngredients.setAttribute("type", "text");
-    appliancesSearch.appendChild(searchBarIngredients);
+    const searchBarAppliances = document.createElement('input');
+    searchBarAppliances.setAttribute("type", "text");
+    appliancesSearch.appendChild(searchBarAppliances);
 
     const searchBarGlass = document.createElement("i");
     searchBarGlass.setAttribute("class", "fa-solid fa-magnifying-glass");
     searchBarAndMagnifyingGlass.appendChild(searchBarGlass);
 
     const appliancesList = document.createElement("ul");
-    appliancesList.classList.add('ingredients-list');
+    appliancesList.classList.add('list-button');
     appliancesSearch.appendChild(appliancesList);
+
+    const appliancesSet = new Set(); 
+
+    recipes.forEach(recipe => {
+        // console.log('appliance', recipe.appliance);
+        appliancesSet.add(recipe.appliance)
+    });
+    // console.log(appliancesSet);
+    
+
+    appliancesSet.forEach((appliance) =>{
+        const appliancesLi = document.createElement("li");
+        appliancesLi.classList.add('element-filter-list');
+        appliancesLi.textContent = appliance;
+        appliancesList.appendChild(appliancesLi);
+    })
 
     return filterAppliances;
 }
@@ -252,17 +295,35 @@ export function displayFilterUstensils(){
     searchBarAndMagnifyingGlass.setAttribute("class", "search-bar-and-glass")
     ustensilsSearch.appendChild(searchBarAndMagnifyingGlass);
 
-    const searchBarIngredients = document.createElement('input');
-    searchBarIngredients.setAttribute("type", "text");
-    ustensilsSearch.appendChild(searchBarIngredients);
+    const searchBarUstensils = document.createElement('input');
+    searchBarUstensils.setAttribute("type", "text");
+    ustensilsSearch.appendChild(searchBarUstensils);
 
     const searchBarGlass = document.createElement("i");
     searchBarGlass.setAttribute("class", "fa-solid fa-magnifying-glass");
     searchBarAndMagnifyingGlass.appendChild(searchBarGlass);
 
     const ustensilsList = document.createElement("ul");
-    ustensilsList.classList.add('ingredients-list');
+    ustensilsList.classList.add('list-button');
     ustensilsSearch.appendChild(ustensilsList);
+
+    const ustensilsSet = new Set();
+
+    recipes.forEach(recipe => {
+        recipe.ustensils.forEach((ustensil) => {
+            // console.log('ustensils', recipe.ustensils);
+            ustensilsSet.add(ustensil);
+        });
+    });
+    // console.log(ustensilsSet);
+    
+    
+    ustensilsSet.forEach((ustensil) => {
+        const ustensilsLi = document.createElement('li');
+        ustensilsLi.classList.add('element-filter-list');
+        ustensilsLi.textContent = ustensil;
+        ustensilsList.appendChild(ustensilsLi);
+    });
 
     return filterUstensils;
 }
