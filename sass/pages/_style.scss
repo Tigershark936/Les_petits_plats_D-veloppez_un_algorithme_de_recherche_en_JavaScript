@@ -204,6 +204,9 @@ body{
         flex-wrap: wrap;
         gap: 48px;
         
+            .errorMessage{
+                font-size: 1rem;
+            }
 
             .recipe-card{
             display: flex;

@@ -6,12 +6,20 @@ import { totalCounterRecipes } from '../utils/counter-recipes.js';
 
 console.log(recipes);
 
+let containerRecipeCard;
+
 function displayRecipes(recipeList) {
-  container.innerHTML = "";
+  containerRecipeCard.innerHTML = "";
+
+  if(recipeList.length === 0){
+    errorMessage.style.display = 'block';
+    errorMessage.textContent = '«Aucune recette ne contient "XXX" vous pouvez chercher « tarte aux pommes», « poisson », etc.';
+  }
   
   recipeList.forEach(recipe => {
     const card = createRecipeCard(recipe);
-    container.appendChild(card);
+    console.log("Ajout de la carte :", recipe.name); 
+    containerRecipeCard.appendChild(card);
   });
 }
 
@@ -41,7 +49,7 @@ function init(){
 
 
     //Création de la boite qui stock les recipesCard
-    const containerRecipeCard = document.createElement('div');
+    containerRecipeCard = document.createElement('div');
     containerRecipeCard.classList.add('container-recipe-card');
     main.appendChild(containerRecipeCard);
 
@@ -49,6 +57,12 @@ function init(){
     const card = createRecipeCard(recipe);
     containerRecipeCard.appendChild(card);
     });
+
+    //Création du message d'erreur si aucun mot clé existe pour trouver une recette
+    const errorMessage = document.createElement('p');
+    errorMessage.classList.add('errorMessage');
+    errorMessage.style.display = 'none';
+    containerRecipeCard.appendChild(errorMessage);
 }
 
 const Header = document.createElement('div');
@@ -96,18 +110,26 @@ inputsearchBarHeader.addEventListener("input", () => {
   // Gère l'évènement de la croix (X)
   clearBtnSearchBarHeader.style.display = searchValue ? "block" : "none";
 
+  // Si la recherche contient au moins 3 caractères, on commence à filtrer les recettes
   if (searchValue.length >= 3) {
     const filtered = recipes.filter(recipe => {
+      // - le nom de la recette
       const isInTitle = recipe.name.toLowerCase().includes(searchValue);
+       // - la description
       const isInDescription = recipe.description.toLowerCase().includes(searchValue);
+      // - un des ingrédients
       const isInIngredients = recipe.ingredients.some(ing =>
         ing.ingredient.toLowerCase().includes(searchValue)
       );
+      // Si la recherche correspond à l’un de ces éléments, on garde la recette
       return isInTitle || isInDescription || isInIngredients;
     });
+    console.log("searchValue:", searchValue, "| length:", searchValue.length);
 
-    displayRecipes(filtered);
+    // Affiche les recettes filtrées dans le DOM
+    displayRecipes(filtered, searchValue);
   } else {
+    // Si moins de 3 caractères dans la barre de recherche, on affiche toutes les recettes sans filtrage
     displayRecipes(recipes);
   }
 });

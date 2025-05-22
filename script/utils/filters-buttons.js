@@ -32,6 +32,11 @@ export function displayFilterIngredients(){
     ingredientsSearch.style.display = "none";
     filterIngredients.appendChild(ingredientsSearch);
 
+    // Empêche la fermeture du menu quand on clique dans le champ de recherche
+    ingredientsSearch.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+
     // --- INTERACTION DU BUTTON FILTER ---
 
     // Clic sur le bouton : ferme les autres
@@ -141,6 +146,10 @@ export function displayFilterAppliances(){
     appliancesSearch.style.display = "none";
     filterAppliances.appendChild(appliancesSearch);
 
+    appliancesSearch.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+
     // --- INTERACTION DU BUTTON FILTER ---
 
     // Clic sur le bouton : ferme les autres
@@ -246,6 +255,10 @@ export function displayFilterUstensils(){
     ustensilsSearch.classList.add('search-element-filter');
     ustensilsSearch.style.display = "none";
     filterUstensils.appendChild(ustensilsSearch);
+
+    ustensilsSearch.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
 
     // --- INTERACTION DU BUTTON FILTER ---
 
