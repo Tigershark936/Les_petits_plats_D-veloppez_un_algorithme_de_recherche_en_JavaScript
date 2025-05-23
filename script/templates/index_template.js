@@ -8,12 +8,15 @@ console.log(recipes);
 
 let containerRecipeCard;
 
-function displayRecipes(recipeList) {
+function displayRecipes(recipeList, searchValue) {
   containerRecipeCard.innerHTML = "";
 
   if(recipeList.length === 0){
-    errorMessage.style.display = 'block';
-    errorMessage.textContent = '«Aucune recette ne contient "XXX" vous pouvez chercher « tarte aux pommes», « poisson », etc.';
+    const errorMessage = document.createElement('p');
+    errorMessage.classList.add('errorMessage');
+    errorMessage.textContent = ` ⚠️ «Aucune recette ne contient "${searchValue}" vous pouvez chercher « tarte aux pommes », « poisson », etc. ⚠️ `;
+    containerRecipeCard.appendChild(errorMessage);
+    return;
   }
   
   recipeList.forEach(recipe => {
@@ -57,12 +60,6 @@ function init(){
     const card = createRecipeCard(recipe);
     containerRecipeCard.appendChild(card);
     });
-
-    //Création du message d'erreur si aucun mot clé existe pour trouver une recette
-    const errorMessage = document.createElement('p');
-    errorMessage.classList.add('errorMessage');
-    errorMessage.style.display = 'none';
-    containerRecipeCard.appendChild(errorMessage);
 }
 
 const Header = document.createElement('div');
@@ -130,7 +127,7 @@ inputsearchBarHeader.addEventListener("input", () => {
     displayRecipes(filtered, searchValue);
   } else {
     // Si moins de 3 caractères dans la barre de recherche, on affiche toutes les recettes sans filtrage
-    displayRecipes(recipes);
+    displayRecipes(recipes, searchValue);
   }
 });
 

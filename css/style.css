@@ -179,6 +179,22 @@ body {
   flex-wrap: wrap;
   gap: 48px;
 }
+.main .container-recipe-card .errorMessage {
+  color: rgb(187, 11, 11);
+  font-size: 1rem;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
 .main .container-recipe-card .recipe-card {
   display: flex;
   flex-direction: column;
@@ -252,11 +268,9 @@ body {
   padding: 0;
   margin: 0;
   gap: 29px;
-  background: rgba(0, 255, 0, 0.1);
 }
 .main .container-recipe-card .recipe-card .recipe-text .box-container-ingredients ul li {
   height: 39px;
-  background: rgba(255, 0, 0, 0.1);
 }
 .main .container-recipe-card .recipe-card .recipe-text .box-container-ingredients ul li .ingredient {
   font-size: 0.875rem;
