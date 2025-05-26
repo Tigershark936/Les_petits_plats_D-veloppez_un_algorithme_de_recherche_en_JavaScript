@@ -2,7 +2,7 @@
 import { recipes } from '../../data/recipes.js';
 import { createRecipeCard } from '../components/recipe-card.js';
 import { displayFilterIngredients, displayFilterAppliances, displayFilterUstensils } from '../utils/filters-buttons.js';
-import { totalCounterRecipes } from '../utils/counter-recipes.js';
+import { totalCounterRecipes, updateRecipeCounter } from '../utils/counter-recipes.js';
 
 console.log(recipes);
 
@@ -10,6 +10,9 @@ let containerRecipeCard;
 
 function displayRecipes(recipeList, searchValue) {
   containerRecipeCard.innerHTML = "";
+
+  // MAJ du compteur de recettes ici
+  updateRecipeCounter(recipeList.length);
 
   if(recipeList.length === 0){
     const errorMessage = document.createElement('p');
