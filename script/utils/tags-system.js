@@ -76,4 +76,5 @@ export function createTagElement(tag){
     return boxTag
 };
 
+// Me retourne une copie du tableau actuel des tags sélectionnés et stocké dans le proxy.
 export const getSelectedTags = () => [...proxyTags.tags];

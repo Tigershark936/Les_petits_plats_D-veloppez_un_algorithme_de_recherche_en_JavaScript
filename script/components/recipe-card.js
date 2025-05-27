@@ -1,7 +1,7 @@
 export function createRecipeCard(recipe){
     //Création de la carte de recette 
     const recipeCard = document.createElement('article');
-    recipeCard.classList.add('recipe-card');
+    recipeCard.classList.add('recipe-card');  
     recipeCard.setAttribute('role', 'article');
     recipeCard.setAttribute('aria-label', `Recette de ${recipe.name}`);
 
