@@ -37,7 +37,7 @@ export const onTagUpdate = (callback) => {
 // Fonction pour ajouter un tag à la liste sans doublon
 export const addTag = (tag) => {
     const validTag = proxyTags.tags.find(tagInList => {
-        return tagInList.nom === tag.nom && tagInList.categorie === tag.categorie;
+        return tagInList.name === tag.name && tagInList.category === tag.category;
     });
 
     // Si le tag n'existe pas encore, on l’ajoute
@@ -49,7 +49,7 @@ export const addTag = (tag) => {
 // Fonction pour retirer un tag de la liste
 const removeTag = (tag) => {
     const filteredTags = proxyTags.tags.filter(tagInList => {
-        return tagInList.nom !== tag.nom || tagInList.categorie !== tag.categorie;
+        return tagInList.name !== tag.name || tagInList.category !== tag.category;
     });
     
     // J’assigne ce nouveau tableau au proxy pour déclencher la mise à jour

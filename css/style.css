@@ -177,6 +177,7 @@ body {
 .main .container-tag {
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
   width: 100%;
 }
 .main .container-tag .box-tag {

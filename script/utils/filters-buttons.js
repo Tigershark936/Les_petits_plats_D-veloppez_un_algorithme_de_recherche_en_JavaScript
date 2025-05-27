@@ -118,6 +118,10 @@ export function displayFilterIngredients(){
          //Event pour selectionner l'element de la liste
         ingredientsLi.addEventListener('click', () => {
             addTag({ name: ingredient, category: 'ingredient' });
+            ingredientsSearch.style.display = "none";
+            buttonIngredientsAngleSymbol.classList.remove("fa-angle-up");
+            buttonIngredientsAngleSymbol.classList.add("fa-angle-down");
+
         });
     });
 
@@ -232,6 +236,9 @@ export function displayFilterAppliances(){
 
         appliancesLi.addEventListener('click', () => {
             addTag({ name: appliance, category: 'appliance' });
+            appliancesSearch.style.display = "none";
+            buttonAppliancesAngleSymbol.classList.remove("fa-angle-up");
+            buttonAppliancesAngleSymbol.classList.add("fa-angle-down");
         });
     })
 
@@ -349,6 +356,9 @@ export function displayFilterUstensils(){
 
         ustensilsLi.addEventListener('click', () => {
             addTag({ name: ustensil, category: 'ustensil' });
+            ustensilsSearch.style.display = "none";
+            buttonUstensilsAngleSymbol.classList.remove("fa-angle-up");
+            buttonUstensilsAngleSymbol.classList.add("fa-angle-down");
         });
     });
 
