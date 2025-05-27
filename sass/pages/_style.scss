@@ -130,7 +130,7 @@ body{
 
                 .search-element-filter{
                     width: 195px;
-                    height: 268px;
+                    max-height: 268px;
                     background-color: $fourth-background-color;
                     border-radius: 0 0 11px 11px;
                     position: absolute; 

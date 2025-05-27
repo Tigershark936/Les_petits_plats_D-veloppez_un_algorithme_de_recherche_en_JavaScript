@@ -54,10 +54,8 @@ function init() {
   filters.setAttribute('role', 'group');
   containerFiltersAndCounter.appendChild(filters);
 
-  // On injecte ici les 3 boutons de filtres dynamiques et le nombre total de recipes
-  filters.appendChild(displayFilterIngredients());
-  filters.appendChild(displayFilterAppliances());
-  filters.appendChild(displayFilterUstensils());
+  // // On injecte ici les 3 boutons de filtres dynamiques et le nombre total de recipes
+  updateFilterButtons(recipes); // affiche les filtres au démarrage
   containerFiltersAndCounter.appendChild(totalCounterRecipes());
 
   //Création de la boite des tags
@@ -81,6 +79,19 @@ function init() {
 
   displayRecipes(recipes, "", []);
 }
+
+// Fonction pour mettre a jour les boutons filtres par rapport au mot clé de la searchbar
+function updateFilterButtons(recipeList) {
+  // Nettoyer les filtres actuels
+  const filters = document.querySelector('.filters');
+  filters.innerHTML = "";
+
+  // Réinjecter les boutons dynamiques avec les recettes filtrées
+  filters.appendChild(displayFilterIngredients(recipeList));
+  filters.appendChild(displayFilterAppliances(recipeList));
+  filters.appendChild(displayFilterUstensils(recipeList));
+}
+
 
 // Fonction pour filtrer en combinant la barre de recherche + les tags
 function filterAndDisplayRecipes() {
@@ -120,6 +131,7 @@ function filterAndDisplayRecipes() {
   });
 
   displayRecipes(filtered, searchValue, tags); // Affiche les recettes lors du chargement
+  updateFilterButtons(filtered);
 }
 
 // Fonction qui regroupe les tags sélectionnés en une chaîne visible rangé par catégorie des buttons(ingrédients, appliances, ustensiles), utilisée pour afficher un résumé clair des filtres actifs.

@@ -7,7 +7,7 @@ import { addTag } from './tags-system.js';
 // console.log(recipes.map(recipe => recipe.appliance));
 // console.log(recipes[0].ustensils);
 
-export function displayFilterIngredients(){
+export function displayFilterIngredients(recipeList){
     // Création du filtre ingrédients
     const filterIngredients = document.createElement('button');
     filterIngredients.classList.add('button-filter');
@@ -100,7 +100,7 @@ export function displayFilterIngredients(){
     //va nour permettre d'éviter répétition des éléments dans la list. Le set est une collection d'éléments uniques
     const ingredientsSet = new Set(); 
 
-    recipes.forEach(recipe => {
+    recipeList.forEach(recipe => {
         recipe.ingredients.forEach((ingredient) => {
             // console.log('ingredient', ingredient);
             // console.log(`|${ingredient.ingredient}|`);
@@ -130,7 +130,7 @@ export function displayFilterIngredients(){
 
 //--------------------------------------------------------------
 
-export function displayFilterAppliances(){
+export function displayFilterAppliances(recipeList){
     // Création du filtre appareils électroménagers
     const filterAppliances = document.createElement('button');
     filterAppliances.classList.add('button-filter');
@@ -221,7 +221,7 @@ export function displayFilterAppliances(){
 
     const appliancesSet = new Set(); 
 
-    recipes.forEach(recipe => {
+    recipeList.forEach(recipe => {
         // console.log('appliance', recipe.appliance);
         appliancesSet.add(recipe.appliance)
     });
@@ -247,7 +247,7 @@ export function displayFilterAppliances(){
 
 //--------------------------------------------------------------
 
-export function displayFilterUstensils(){
+export function displayFilterUstensils(recipeList){
     // Création du filtre ustensiles
     const filterUstensils = document.createElement('button');
     filterUstensils.classList.add('button-filter');
@@ -339,7 +339,7 @@ export function displayFilterUstensils(){
 
     const ustensilsSet = new Set();
 
-    recipes.forEach(recipe => {
+    recipeList.forEach(recipe => {
         recipe.ustensils.forEach((ustensil) => {
             // console.log('ustensils', recipe.ustensils);
             ustensilsSet.add(ustensil);
