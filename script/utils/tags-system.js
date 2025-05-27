@@ -1,4 +1,4 @@
-// On crée un objet de base avec une propriété "ingredient" qu'on veut surveiller
+// On crée un objet de base avec une propriété "tags" qu'on veut surveiller
 const listeTags = { tags: [] };
 
 // Cette fonction sera appelée à chaque changement des tags actifs
@@ -75,3 +75,5 @@ export function createTagElement(tag){
     });
     return boxTag
 };
+
+export const getSelectedTags = () => [...proxyTags.tags];

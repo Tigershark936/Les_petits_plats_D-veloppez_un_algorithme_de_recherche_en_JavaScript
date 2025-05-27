@@ -2,7 +2,7 @@
 import { recipes } from '../../data/recipes.js';
 import { createRecipeCard } from '../components/recipe-card.js';
 import { displayFilterIngredients, displayFilterAppliances, displayFilterUstensils } from '../utils/filters-buttons.js';
-import { onTagUpdate, createTagElement } from '../utils/tags-system.js';
+import { onTagUpdate, createTagElement, getSelectedTags } from '../utils/tags-system.js';
 import { totalCounterRecipes, updateRecipeCounter } from '../utils/counter-recipes.js';
 
 
@@ -10,7 +10,7 @@ console.log(recipes);
 
 let containerRecipeCard;
 
-function displayRecipes(recipeList, searchValue) {
+function displayRecipes(recipeList, searchValue, tags) {
   containerRecipeCard.innerHTML = "";
 
   // MAJ du compteur de recettes ici
@@ -19,7 +19,11 @@ function displayRecipes(recipeList, searchValue) {
   if(recipeList.length === 0){
     const errorMessage = document.createElement('p');
     errorMessage.classList.add('errorMessage');
-    errorMessage.textContent = ` ⚠️ «Aucune recette ne contient "${searchValue}" vous pouvez chercher « tarte aux pommes », « poisson », etc. ⚠️ `;
+
+    const tagMessage = formatSelectedTags(tags || []);
+    const searchMessage = searchValue ? `«${searchValue}»` : '';
+    errorMessage.textContent = `⚠️ Aucune recette ne contient ${searchMessage}${tagMessage ? ' avec ' + tagMessage : ''} vous pouvez chercher « tarte aux pommes», «poisson», etc. ⚠️`;
+
     containerRecipeCard.appendChild(errorMessage);
     return;
   }
@@ -66,6 +70,7 @@ function init(){
         const tagElement = createTagElement(tag);
         containerTag.appendChild(tagElement);
       });
+      filterRecipesWithTags(tags);
     });
 
     //Création de la boite qui stock les recipesCard
@@ -91,14 +96,33 @@ function filterRecipesWithTags(tags){
   const recipeUstensils = recipe.ustensils.map((u) => u.toLowerCase());
   const recipeAppliance = recipe.appliance.toLowerCase();
 
+  // Vérifie que tous les tags d'ingrédients sont présents dans la recette
   const matchesIngredients = activeIngredients.every((ing) => recipeIngredients.includes(ing));
+  // Vérifie que la recette utilise l'appareil sélectionné (ou ignore si aucun tag d'appareil actif)
   const matchesAppliance = activeAppliances.length === 0 || activeAppliances.includes(recipeAppliance);
+  // Vérifie que tous les ustensiles requis sont présents dans la recette
   const matchesUstensils = activeUstensils.every((ust) => recipeUstensils.includes(ust));
 
-    return matchesIngredients && matchesAppliance && matchesUstensils;
+  // La recette est conservée dans le container si elle remplit toutes les conditions
+  return matchesIngredients && matchesAppliance && matchesUstensils;
 });
-  // 3. Display
-  displayRecipes(filteredRecipes, "");
+  //Affichage les recettes filtrées par l'utilisateur
+  displayRecipes(filteredRecipes, "", tags);
+}
+
+// Fonction qui regroupe les tags sélectionnés en une chaîne visible rangé par catégorie des buttons(ingrédients, appliances, ustensiles), utilisée pour afficher un résumé clair des filtres actifs.
+function formatSelectedTags(tags) {
+  const ing = tags.filter(t => t.category === 'ingredient').map(t => t.name).join(', ');
+  const app = tags.filter(t => t.category === 'appliance').map(t => t.name).join(', ');
+  const ust = tags.filter(t => t.category === 'ustensil').map(t => t.name).join(', ');
+
+  // Ajoute les sections de texte formatées seulement si elles contiennent des valeurs
+  let result = "";
+  if (ing) result += `Ingrédients : ${ing} – `;
+  if (app) result += `Appareil : ${app} – `;
+  if (ust) result += `Ustensiles : ${ust}`;
+
+  return result.trim().replace(/–\s*$/, ''); // retire le dernier tiret si besoin
 }
 
 const Header = document.createElement('div');
@@ -146,6 +170,9 @@ inputsearchBarHeader.addEventListener("input", () => {
   // Gère l'évènement de la croix (X)
   clearBtnSearchBarHeader.style.display = searchValue ? "block" : "none";
 
+  const tags = getSelectedTags();
+  console.log("📌 Tags actifs au moment de la recherche :", tags);
+
   // Si la recherche contient au moins 3 caractères, on commence à filtrer les recettes
   if (searchValue.length >= 3) {
     const filtered = recipes.filter(recipe => {
@@ -163,10 +190,10 @@ inputsearchBarHeader.addEventListener("input", () => {
     console.log("searchValue:", searchValue, "| length:", searchValue.length);
 
     // Affiche les recettes filtrées dans le DOM
-    displayRecipes(filtered, searchValue);
+    displayRecipes(filtered, searchValue, tags);
   } else {
     // Si moins de 3 caractères dans la barre de recherche, on affiche toutes les recettes sans filtrage
-    displayRecipes(recipes, searchValue);
+    displayRecipes(recipes, searchValue, tags);
   }
 });
 
