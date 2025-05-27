@@ -1,4 +1,5 @@
 import { recipes } from '../../data/recipes.js';
+import { addTag } from './tags-system.js';
 
 // console.log(recipes);
 // console.log(recipes[0].ingredients);
@@ -113,6 +114,11 @@ export function displayFilterIngredients(){
         ingredientsLi.classList.add('element-filter-list');
         ingredientsLi.textContent = ingredient;
         ingredientsList.appendChild(ingredientsLi);
+
+         //Event pour selectionner l'element de la liste
+        ingredientsLi.addEventListener('click', () => {
+            addTag({ name: ingredient, category: 'ingredient' });
+        });
     });
 
     return filterIngredients;
@@ -223,6 +229,10 @@ export function displayFilterAppliances(){
         appliancesLi.classList.add('element-filter-list');
         appliancesLi.textContent = appliance;
         appliancesList.appendChild(appliancesLi);
+
+        appliancesLi.addEventListener('click', () => {
+            addTag({ name: appliance, category: 'appliance' });
+        });
     })
 
     return filterAppliances;
@@ -336,6 +346,10 @@ export function displayFilterUstensils(){
         ustensilsLi.classList.add('element-filter-list');
         ustensilsLi.textContent = ustensil;
         ustensilsList.appendChild(ustensilsLi);
+
+        ustensilsLi.addEventListener('click', () => {
+            addTag({ name: ustensil, category: 'ustensil' });
+        });
     });
 
     return filterUstensils;

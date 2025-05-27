@@ -102,7 +102,7 @@ body{
     .filters-Counter{
         display: flex;
         justify-content: space-between;
-        margin-bottom: 55px;
+        margin-bottom: 21px;
 
         .filters{
             display: flex; 
@@ -198,11 +198,43 @@ body{
             }
         }
     }
+
+    .container-tag{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+        .box-tag{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 203px;
+            height: 53px;
+            border-radius: 10px;
+            background-color: $primary-background-color;
+            padding-left: 18px;
+            cursor: pointer;
+            
+    
+            .tag-name{
+                font-size: 0.875rem;
+                font-family: $font-text;
+            }
+    
+            .tag-close{
+                font-size: 0.875rem;
+                background-color: $primary-background-color;
+                border: none;
+                padding-right: 21px;
+            }
+        }
+    }
     
     .container-recipe-card{
         display: flex;
         flex-wrap: wrap;
         gap: 48px;
+        margin-top: 43px;
         
             .errorMessage{
                 color: rgb(187, 11, 11);

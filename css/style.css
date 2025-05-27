@@ -91,7 +91,7 @@ body {
 .main .filters-Counter {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 55px;
+  margin-bottom: 21px;
 }
 .main .filters-Counter .filters {
   display: flex;
@@ -174,10 +174,37 @@ body {
   font-family: "Anton", sans-serif;
   font-weight: 400;
 }
+.main .container-tag {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.main .container-tag .box-tag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 203px;
+  height: 53px;
+  border-radius: 10px;
+  background-color: #ffd15b;
+  padding-left: 18px;
+  cursor: pointer;
+}
+.main .container-tag .box-tag .tag-name {
+  font-size: 0.875rem;
+  font-family: "Manrope", sans-serif;
+}
+.main .container-tag .box-tag .tag-close {
+  font-size: 0.875rem;
+  background-color: #ffd15b;
+  border: none;
+  padding-right: 21px;
+}
 .main .container-recipe-card {
   display: flex;
   flex-wrap: wrap;
   gap: 48px;
+  margin-top: 43px;
 }
 .main .container-recipe-card .errorMessage {
   color: rgb(187, 11, 11);

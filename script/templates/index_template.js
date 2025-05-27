@@ -2,7 +2,9 @@
 import { recipes } from '../../data/recipes.js';
 import { createRecipeCard } from '../components/recipe-card.js';
 import { displayFilterIngredients, displayFilterAppliances, displayFilterUstensils } from '../utils/filters-buttons.js';
+import { onTagUpdate, createTagElement } from '../utils/tags-system.js';
 import { totalCounterRecipes, updateRecipeCounter } from '../utils/counter-recipes.js';
+
 
 console.log(recipes);
 
@@ -53,6 +55,18 @@ function init(){
     filters.appendChild(displayFilterUstensils());
     containerFiltersAndCounter.appendChild(totalCounterRecipes());
 
+    const containerTag = document.createElement('div');
+    containerTag.classList.add('container-tag');
+    main.appendChild(containerTag);
+
+    onTagUpdate((tags) => {
+      containerTag.innerHTML = "";
+
+      tags.forEach(tag => {
+        const tagElement = createTagElement(tag);
+        containerTag.appendChild(tagElement);
+      });
+    });
 
     //Création de la boite qui stock les recipesCard
     containerRecipeCard = document.createElement('div');
@@ -63,6 +77,28 @@ function init(){
     const card = createRecipeCard(recipe);
     containerRecipeCard.appendChild(card);
     });
+}
+
+function filterRecipesWithTags(tags){
+  // Séparer les tags selon leur catégorie
+  const activeIngredients = tags.filter((tag) => tag.category === 'ingredient').map(tag  => tag.name.toLowerCase());
+  const activeAppliances = tags.filter((tag) => tag.category === 'appliance').map(tag => tag.name.toLowerCase());
+  const activeUstensils = tags.filter((tag) => tag.category === 'ustensil').map(tag => tag.name.toLowerCase());
+
+ // 2. Filter recipes
+  const filteredRecipes = recipes.filter((recipe) => {
+  const recipeIngredients = recipe.ingredients.map((i) => i.ingredient.toLowerCase());
+  const recipeUstensils = recipe.ustensils.map((u) => u.toLowerCase());
+  const recipeAppliance = recipe.appliance.toLowerCase();
+
+  const matchesIngredients = activeIngredients.every((ing) => recipeIngredients.includes(ing));
+  const matchesAppliance = activeAppliances.length === 0 || activeAppliances.includes(recipeAppliance);
+  const matchesUstensils = activeUstensils.every((ust) => recipeUstensils.includes(ust));
+
+    return matchesIngredients && matchesAppliance && matchesUstensils;
+});
+  // 3. Display
+  displayRecipes(filteredRecipes, "");
 }
 
 const Header = document.createElement('div');
