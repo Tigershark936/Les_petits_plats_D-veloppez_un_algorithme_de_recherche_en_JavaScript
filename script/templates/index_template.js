@@ -20,10 +20,8 @@ function displayRecipes(recipeList, searchValue, tags) {
   if (recipeList.length === 0) {
     const errorMessage = document.createElement('p');
     errorMessage.classList.add('errorMessage');
-
-    const tagMessage = formatSelectedTags(tags || []);
-    const searchMessage = searchValue ? `«${searchValue}»` : '';
-    errorMessage.textContent = `⚠️ Aucune recette ne contient ${searchMessage}${tagMessage ? ' avec ' + tagMessage : ''} vous pouvez chercher « tarte aux pommes», «poisson», etc. ⚠️`;
+    const searchMessage =`«${searchValue}»`;
+    errorMessage.textContent = `⚠️ Aucune recette ne contient ${searchMessage} vous pouvez chercher « tarte aux pommes», «poisson», etc. ⚠️`;
 
     containerRecipeCard.appendChild(errorMessage);
     return;

@@ -200,6 +200,7 @@ body {
   background-color: #ffd15b;
   border: none;
   padding-right: 21px;
+  cursor: pointer;
 }
 .main .container-recipe-card {
   display: flex;
