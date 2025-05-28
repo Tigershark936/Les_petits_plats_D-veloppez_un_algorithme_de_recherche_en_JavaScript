@@ -42,6 +42,7 @@ export function displayFilterIngredients(recipeList){
 
     // Clic sur le bouton : ferme les autres
     filterIngredients.addEventListener("click", (e) => {
+        filterIngredients.style.borderRadius = '11px 11px 0 0';
         e.stopPropagation();
 
         // Fermer tous les autres menus + flèches
@@ -52,6 +53,10 @@ export function displayFilterIngredients(recipeList){
                 if (arrow) {
                     arrow.classList.remove("fa-angle-up");
                     arrow.classList.add("fa-angle-down");
+                }
+                const button = menu.parentElement.querySelector('.button-filter');
+                if (button) {
+                    button.style.borderRadius = '11px'; // reset la forme
                 }
             }
         });
@@ -79,6 +84,8 @@ export function displayFilterIngredients(recipeList){
             buttonIngredientsAngleSymbol.classList.remove("fa-angle-up");
             buttonIngredientsAngleSymbol.classList.add("fa-angle-down");
         }
+        // Remet la forme initiale du bouton
+        filterIngredients.style.borderRadius = '11px';
     });
 
     const searchBarAndMagnifyingGlass = document.createElement("div");
@@ -92,6 +99,12 @@ export function displayFilterIngredients(recipeList){
     const searchBarGlass = document.createElement("i");
     searchBarGlass.setAttribute("class", "fa-solid fa-magnifying-glass");
     searchBarAndMagnifyingGlass.appendChild(searchBarGlass);
+
+    const clearIconInput = document.createElement('i');
+    clearIconInput.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+    clearIconInput.classList.add('clear-input');
+    clearIconInput.style.display = 'none';
+    searchBarAndMagnifyingGlass.appendChild(clearIconInput);
 
     const ingredientsList = document.createElement("ul");
     ingredientsList.classList.add('list-button');
@@ -125,6 +138,23 @@ export function displayFilterIngredients(recipeList){
         });
     });
 
+    // Je stock les données de depart du set() pour les rendre a nouveau filtrable 
+    const ingredientsArray = Array.from(ingredientsSet);
+
+    dynamicInputForButtonSearchFilter({
+            inputElement: searchBarIngredients,
+            listElement: ingredientsList,
+            itemsArray: ingredientsArray,
+            clearButtonElement: clearIconInput,
+        onItemSelect: (ingredient) => {
+            addTag({ name: ingredient, category: 'ingredient' });
+        },
+        closeMenu: () => {
+            ingredientsSearch.style.display = "none";
+            buttonIngredientsAngleSymbol.classList.remove("fa-angle-up");
+            buttonIngredientsAngleSymbol.classList.add("fa-angle-down");
+        }
+    });
     return filterIngredients;
 }
 
@@ -164,6 +194,7 @@ export function displayFilterAppliances(recipeList){
 
     // Clic sur le bouton : ferme les autres
     filterAppliances.addEventListener("click", (e) => {
+        filterAppliances.style.borderRadius = '11px 11px 0 0';
         e.stopPropagation();
 
         // Fermer tous les autres menus + flèches
@@ -175,6 +206,10 @@ export function displayFilterAppliances(recipeList){
                     arrow.classList.remove("fa-angle-up");
                     arrow.classList.add("fa-angle-down");
                 }
+                const button = menu.parentElement.querySelector('.button-filter');
+                if (button) {
+                    button.style.borderRadius = '11px';
+                }  
             }
         });
 
@@ -200,6 +235,8 @@ export function displayFilterAppliances(recipeList){
             //Remet de la flèche vers le bas
             buttonAppliancesAngleSymbol.classList.remove("fa-angle-up");
             buttonAppliancesAngleSymbol.classList.add("fa-angle-down");
+            // Remet la forme initiale du bouton
+            filterAppliances.style.borderRadius = '11px';
         }
     });
 
@@ -215,6 +252,12 @@ export function displayFilterAppliances(recipeList){
     searchBarGlass.setAttribute("class", "fa-solid fa-magnifying-glass");
     searchBarAndMagnifyingGlass.appendChild(searchBarGlass);
 
+    const clearIconInput = document.createElement('i');
+    clearIconInput.classList.add('clear-input');
+    clearIconInput.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+    clearIconInput.style.display = 'none';
+    searchBarAndMagnifyingGlass.appendChild(clearIconInput);
+
     const appliancesList = document.createElement("ul");
     appliancesList.classList.add('list-button');
     appliancesSearch.appendChild(appliancesList);
@@ -223,7 +266,7 @@ export function displayFilterAppliances(recipeList){
 
     recipeList.forEach(recipe => {
         // console.log('appliance', recipe.appliance);
-        appliancesSet.add(recipe.appliance)
+        appliancesSet.add(recipe.appliance.toLowerCase().trim());
     });
     // console.log(appliancesSet);
     
@@ -241,6 +284,24 @@ export function displayFilterAppliances(recipeList){
             buttonAppliancesAngleSymbol.classList.add("fa-angle-down");
         });
     })
+
+    const appliancesArray = Array.from(appliancesSet);
+
+    // Appel de la fonction utilitaire pour gérer la recherche dynamique
+    dynamicInputForButtonSearchFilter({
+        inputElement: searchBarAppliances,
+        listElement: appliancesList,
+        itemsArray: appliancesArray,
+        clearButtonElement: clearIconInput,
+        onItemSelect: (appliance) => {
+            addTag({ name: appliance, category: 'appliance' });
+        },
+        closeMenu: () => {
+            appliancesSearch.style.display = "none";
+            buttonAppliancesAngleSymbol.classList.remove("fa-angle-up");
+            buttonAppliancesAngleSymbol.classList.add("fa-angle-down");
+        }
+    });
 
     return filterAppliances;
 }
@@ -281,6 +342,7 @@ export function displayFilterUstensils(recipeList){
 
     // Clic sur le bouton : ferme les autres
     filterUstensils.addEventListener("click", (e) => {
+        filterUstensils.style.borderRadius = '11px 11px 0 0';
         e.stopPropagation();
 
         // Fermer tous les autres menus + flèches
@@ -291,6 +353,10 @@ export function displayFilterUstensils(recipeList){
                 if (arrow) {
                     arrow.classList.remove("fa-angle-up");
                     arrow.classList.add("fa-angle-down");
+                }
+                const button = menu.parentElement.querySelector('.button-filter');
+                if (button) {
+                    button.style.borderRadius = '11px';
                 }   
             }
         });
@@ -317,6 +383,8 @@ export function displayFilterUstensils(recipeList){
             //Remet de la flèche vers le bas
             buttonUstensilsAngleSymbol.classList.add("fa-angle-down");
             buttonUstensilsAngleSymbol.classList.remove("fa-angle-up");
+            // Remet la forme initiale du bouton
+            filterUstensils.style.borderRadius = '11px';
         }
     });
 
@@ -333,6 +401,12 @@ export function displayFilterUstensils(recipeList){
     searchBarGlass.setAttribute("class", "fa-solid fa-magnifying-glass");
     searchBarAndMagnifyingGlass.appendChild(searchBarGlass);
 
+    const clearIconInput = document.createElement('i');
+    clearIconInput.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+    clearIconInput.classList.add('clear-input');
+    clearIconInput.style.display = 'none';
+    searchBarAndMagnifyingGlass.appendChild(clearIconInput);
+
     const ustensilsList = document.createElement("ul");
     ustensilsList.classList.add('list-button');
     ustensilsSearch.appendChild(ustensilsList);
@@ -342,7 +416,7 @@ export function displayFilterUstensils(recipeList){
     recipeList.forEach(recipe => {
         recipe.ustensils.forEach((ustensil) => {
             // console.log('ustensils', recipe.ustensils);
-            ustensilsSet.add(ustensil);
+            ustensilsSet.add(ustensil.toLowerCase().trim());
         });
     });
     // console.log(ustensilsSet);
@@ -362,5 +436,74 @@ export function displayFilterUstensils(recipeList){
         });
     });
 
+    const ustensilsArray = Array.from(ustensilsSet);
+
+    // Appel de la fonction utilitaire pour gérer la recherche dynamique
+    dynamicInputForButtonSearchFilter({
+        inputElement: searchBarUstensils,
+        listElement: ustensilsList,
+        itemsArray: ustensilsArray,
+        clearButtonElement: clearIconInput,
+        onItemSelect: (ustensil) => {
+            addTag({ name: ustensil, category: 'ustensil' });
+        },
+        closeMenu: () => {
+            ustensilsSearch.style.display = "none";
+            buttonUstensilsAngleSymbol.classList.remove("fa-angle-up");
+            buttonUstensilsAngleSymbol.classList.add("fa-angle-down");
+        },
+    });
+
     return filterUstensils;
-}
+};
+
+//Fonction pour me permettre de jouer avec les inputs du filter-button et de créer les liste de recherche avec les value
+function dynamicInputForButtonSearchFilter({
+    inputElement, // champ input
+    listElement,  // liste UL à remplir
+    itemsArray,   // tableau de base à filtrer
+    onItemSelect, // fonction appelée au clic sur un <li>
+    closeMenu,    // fonction à appeler pour fermer le menu
+    clearButtonElement = null // paramètre pour avoir l'action de la croix dans le input
+}){
+    function renderList(array) {
+        listElement.innerHTML = "";
+        array.forEach((item) => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            li.classList.add("element-filter-list");
+            listElement.appendChild(li);
+
+            li.addEventListener("click", () => {
+                onItemSelect(item);
+                closeMenu();
+            });
+        });
+    };
+
+    inputElement.addEventListener("input", () => {
+        const value = inputElement.value.trim().toLowerCase();
+
+        if (value.length >= 1) {
+            const filtered = itemsArray.filter(item => item.includes(value));
+            renderList(filtered);
+        } else {
+            renderList(itemsArray);
+        }
+
+        if (clearButtonElement) {
+            clearButtonElement.style.display = value.length > 0 ? 'block' : 'none';
+        }
+    });
+
+    if (clearButtonElement) {
+        clearButtonElement.addEventListener("click", () => {
+            inputElement.value = '';
+            renderList(itemsArray);
+            clearButtonElement.style.display = 'none';
+        });
+    }
+
+  // Affiche la liste complète au départ
+  renderList(itemsArray);
+};

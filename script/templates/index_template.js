@@ -11,7 +11,7 @@ console.log(recipes);
 let containerRecipeCard;
 
 // Fonction d'affichage des recettes, gère aussi l'affichage du message d'erreur
-function displayRecipes(recipeList, searchValue, tags) {
+function displayRecipes(recipeList, searchValue) {
   containerRecipeCard.innerHTML = "";
 
   // MAJ du compteur de recettes ici

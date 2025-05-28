@@ -71,7 +71,7 @@ body{
             top: 25px;
             right: calc((100% - 954px) / 2 + 85px);
             font-size: 24px;
-            color:red;
+            color: $primary-color;
             z-index: 2;
         }
         
@@ -178,10 +178,19 @@ body{
                         border: solid 1px rgba(198, 198, 198, 1);
                     }
 
-                    i {
+                    .fa-magnifying-glass{
                         position: absolute;
-                        top: 0;
-                        right: 0;
+                        top: 25px;
+                        right: 27px;
+                        color: $primary-color;
+                        border: 0.5px;
+                        }
+
+                    .clear-input{
+                        position: absolute;
+                        top: 22px;
+                        right: 50px;
+                        color:$primary-color;
                     }
                 }
             }

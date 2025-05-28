@@ -64,7 +64,7 @@ body {
   top: 25px;
   right: calc((100% - 954px) / 2 + 85px);
   font-size: 24px;
-  color: red;
+  color: #7a7a7a;
   z-index: 2;
 }
 .header .search-bar button {
@@ -160,10 +160,18 @@ body {
   caret-color: rgb(198, 198, 198);
   border: solid 1px rgb(198, 198, 198);
 }
-.main .filters-Counter .filters .button-filter .search-element-filter i {
+.main .filters-Counter .filters .button-filter .search-element-filter .fa-magnifying-glass {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 25px;
+  right: 27px;
+  color: #7a7a7a;
+  border: 0.5px;
+}
+.main .filters-Counter .filters .button-filter .search-element-filter .clear-input {
+  position: absolute;
+  top: 22px;
+  right: 50px;
+  color: #7a7a7a;
 }
 .main .filters-Counter .counter {
   display: flex;
