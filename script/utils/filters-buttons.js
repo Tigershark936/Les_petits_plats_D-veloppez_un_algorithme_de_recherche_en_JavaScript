@@ -1,16 +1,10 @@
-import { recipes } from '../../data/recipes.js';
 import { addTag } from './tags-system.js';
-
-// console.log(recipes);
-// console.log(recipes[0].ingredients);
-// console.log(recipes[0].appliance);
-// console.log(recipes.map(recipe => recipe.appliance));
-// console.log(recipes[0].ustensils);
 
 export function displayFilterIngredients(recipeList){
     // Création du filtre ingrédients
     const filterIngredients = document.createElement('button');
     filterIngredients.classList.add('button-filter');
+    filterIngredients.setAttribute('data-role', 'filter-button');
     filterIngredients.setAttribute('aria-haspopup', 'listbox');
     filterIngredients.setAttribute('aria-expanded', 'false');
     filterIngredients.setAttribute('aria-label', 'Filtrer par ingrédients');
@@ -32,61 +26,6 @@ export function displayFilterIngredients(recipeList){
     ingredientsSearch.classList.add('search-element-filter');
     ingredientsSearch.style.display = "none";
     filterIngredients.appendChild(ingredientsSearch);
-
-    // Empêche la fermeture du menu quand on clique dans le champ de recherche
-    ingredientsSearch.addEventListener("click", (e) => {
-        e.stopPropagation();
-    });
-
-    // --- INTERACTION DU BUTTON FILTER ---
-
-    // Clic sur le bouton : ferme les autres
-    filterIngredients.addEventListener("click", (e) => {
-        filterIngredients.style.borderRadius = '11px 11px 0 0';
-        e.stopPropagation();
-
-        // Fermer tous les autres menus + flèches
-        document.querySelectorAll('.search-element-filter').forEach(menu => {
-            if (menu !== ingredientsSearch) {
-                menu.style.display = "none";
-                const arrow = menu.parentElement.querySelector(".dropdown-arrow");
-                if (arrow) {
-                    arrow.classList.remove("fa-angle-up");
-                    arrow.classList.add("fa-angle-down");
-                }
-                const button = menu.parentElement.querySelector('.button-filter');
-                if (button) {
-                    button.style.borderRadius = '11px'; // reset la forme
-                }
-            }
-        });
-
-        // Toggle ouverture du menu ingredients
-        const isOpen = ingredientsSearch.style.display === "block";
-        ingredientsSearch.style.display = isOpen ? "none" : "block";
-
-        // Toggle flèche
-        if (isOpen) {
-            buttonIngredientsAngleSymbol.classList.add("fa-angle-down");
-            buttonIngredientsAngleSymbol.classList.remove("fa-angle-up");
-        } else {
-            buttonIngredientsAngleSymbol.classList.remove("fa-angle-down");
-            buttonIngredientsAngleSymbol.classList.add("fa-angle-up");
-        }
-    });
-
-    //Ferme la liste et le input quand on clique en dehors
-    document.addEventListener("click", (e) => {
-        if (!filterIngredients.contains(e.target)) {
-            ingredientsSearch.style.display = "none";
-
-            //Remet de la flèche vers le bas
-            buttonIngredientsAngleSymbol.classList.remove("fa-angle-up");
-            buttonIngredientsAngleSymbol.classList.add("fa-angle-down");
-        }
-        // Remet la forme initiale du bouton
-        filterIngredients.style.borderRadius = '11px';
-    });
 
     const searchBarAndMagnifyingGlass = document.createElement("div");
     searchBarAndMagnifyingGlass.setAttribute("class", "search-bar-and-glass")
@@ -155,6 +94,12 @@ export function displayFilterIngredients(recipeList){
             buttonIngredientsAngleSymbol.classList.add("fa-angle-down");
         }
     });
+    // Appel de la function pour avoir les events des filters-buttons
+    setupFilterButtonInteraction({
+        button: filterIngredients,
+        menu: ingredientsSearch,
+        arrow: buttonIngredientsAngleSymbol
+    });
     return filterIngredients;
 }
 
@@ -164,6 +109,7 @@ export function displayFilterAppliances(recipeList){
     // Création du filtre appareils électroménagers
     const filterAppliances = document.createElement('button');
     filterAppliances.classList.add('button-filter');
+    filterAppliances.setAttribute('data-role', 'filter-button');
     filterAppliances.setAttribute('aria-haspopup', 'listbox');
     filterAppliances.setAttribute('aria-expanded', 'false');
     filterAppliances.setAttribute('aria-label', 'Filtrer par appareils électroménagers');
@@ -185,60 +131,6 @@ export function displayFilterAppliances(recipeList){
     appliancesSearch.classList.add('search-element-filter');
     appliancesSearch.style.display = "none";
     filterAppliances.appendChild(appliancesSearch);
-
-    appliancesSearch.addEventListener("click", (e) => {
-        e.stopPropagation();
-    });
-
-    // --- INTERACTION DU BUTTON FILTER ---
-
-    // Clic sur le bouton : ferme les autres
-    filterAppliances.addEventListener("click", (e) => {
-        filterAppliances.style.borderRadius = '11px 11px 0 0';
-        e.stopPropagation();
-
-        // Fermer tous les autres menus + flèches
-        document.querySelectorAll('.search-element-filter').forEach(menu => {
-            if (menu !== appliancesSearch) {
-                menu.style.display = "none";
-                const arrow = menu.parentElement.querySelector(".dropdown-arrow");
-                if (arrow) {
-                    arrow.classList.remove("fa-angle-up");
-                    arrow.classList.add("fa-angle-down");
-                }
-                const button = menu.parentElement.querySelector('.button-filter');
-                if (button) {
-                    button.style.borderRadius = '11px';
-                }  
-            }
-        });
-
-        // Toggle ouverture du menu appareils electroménagers
-        const isOpen = appliancesSearch.style.display === "block";
-        appliancesSearch.style.display = isOpen ? "none" : "block";
-
-        // Toggle flèche
-        if (isOpen) {
-            buttonAppliancesAngleSymbol.classList.add("fa-angle-down");
-            buttonAppliancesAngleSymbol.classList.remove("fa-angle-up");
-        } else {
-            buttonAppliancesAngleSymbol.classList.remove("fa-angle-down");
-            buttonAppliancesAngleSymbol.classList.add("fa-angle-up");
-        }
-    });
-
-    //Ferme quand on clique en dehors
-    document.addEventListener("click", (e) => {
-        if (!filterAppliances.contains(e.target)) {
-            appliancesSearch.style.display = "none";
-
-            //Remet de la flèche vers le bas
-            buttonAppliancesAngleSymbol.classList.remove("fa-angle-up");
-            buttonAppliancesAngleSymbol.classList.add("fa-angle-down");
-            // Remet la forme initiale du bouton
-            filterAppliances.style.borderRadius = '11px';
-        }
-    });
 
     const searchBarAndMagnifyingGlass = document.createElement("div");
     searchBarAndMagnifyingGlass.setAttribute("class", "search-bar-and-glass")
@@ -302,7 +194,12 @@ export function displayFilterAppliances(recipeList){
             buttonAppliancesAngleSymbol.classList.add("fa-angle-down");
         }
     });
-
+    // Appel de la function pour avoir les events des filters-buttons
+    setupFilterButtonInteraction({
+        button: filterAppliances,
+        menu: appliancesSearch,
+        arrow: buttonAppliancesAngleSymbol
+    });
     return filterAppliances;
 }
 
@@ -312,6 +209,7 @@ export function displayFilterUstensils(recipeList){
     // Création du filtre ustensiles
     const filterUstensils = document.createElement('button');
     filterUstensils.classList.add('button-filter');
+    filterUstensils.setAttribute('data-role', 'filter-button');
     filterUstensils.setAttribute('aria-haspopup', 'listbox');
     filterUstensils.setAttribute('aria-expanded', 'false');
     filterUstensils.setAttribute('aria-label', 'Filtrer par ustensiles');
@@ -333,61 +231,6 @@ export function displayFilterUstensils(recipeList){
     ustensilsSearch.classList.add('search-element-filter');
     ustensilsSearch.style.display = "none";
     filterUstensils.appendChild(ustensilsSearch);
-
-    ustensilsSearch.addEventListener("click", (e) => {
-        e.stopPropagation();
-    });
-
-    // --- INTERACTION DU BUTTON FILTER ---
-
-    // Clic sur le bouton : ferme les autres
-    filterUstensils.addEventListener("click", (e) => {
-        filterUstensils.style.borderRadius = '11px 11px 0 0';
-        e.stopPropagation();
-
-        // Fermer tous les autres menus + flèches
-        document.querySelectorAll('.search-element-filter').forEach(menu => {
-            if (menu !== ustensilsSearch) {
-                menu.style.display = "none";
-                const arrow = menu.parentElement.querySelector(".dropdown-arrow");
-                if (arrow) {
-                    arrow.classList.remove("fa-angle-up");
-                    arrow.classList.add("fa-angle-down");
-                }
-                const button = menu.parentElement.querySelector('.button-filter');
-                if (button) {
-                    button.style.borderRadius = '11px';
-                }   
-            }
-        });
-
-        // Toggle ouverture du menu ustensiles
-        const isOpen = ustensilsSearch.style.display === "block";
-        ustensilsSearch.style.display = isOpen ? "none" : "block";
-
-        // Toggle flèche
-        if (isOpen) {
-            buttonUstensilsAngleSymbol.classList.add("fa-angle-down");
-            buttonUstensilsAngleSymbol.classList.remove("fa-angle-up");
-        } else {
-            buttonUstensilsAngleSymbol.classList.remove("fa-angle-down");
-            buttonUstensilsAngleSymbol.classList.add("fa-angle-up");
-        }
-    });
-
-    //Ferme quand on clique en dehors
-    document.addEventListener("click", (e) => {
-        if (!filterUstensils.contains(e.target)) {
-            ustensilsSearch.style.display = "none";
-
-            //Remet de la flèche vers le bas
-            buttonUstensilsAngleSymbol.classList.add("fa-angle-down");
-            buttonUstensilsAngleSymbol.classList.remove("fa-angle-up");
-            // Remet la forme initiale du bouton
-            filterUstensils.style.borderRadius = '11px';
-        }
-    });
-
 
     const searchBarAndMagnifyingGlass = document.createElement("div");
     searchBarAndMagnifyingGlass.setAttribute("class", "search-bar-and-glass")
@@ -453,9 +296,79 @@ export function displayFilterUstensils(recipeList){
             buttonUstensilsAngleSymbol.classList.add("fa-angle-down");
         },
     });
-
+    // Appel de la function pour avoir les events des filters-buttons
+    setupFilterButtonInteraction({
+        button: filterUstensils,
+        menu: ustensilsSearch,
+        arrow: buttonUstensilsAngleSymbol
+    });
     return filterUstensils;
 };
+
+
+// Function for --- INTERACTION DU BUTTON FILTER ---
+function setupFilterButtonInteraction({
+    button, // Le bouton cliquable du filtre (ex. "Ingrédients, Appareils, Ustensils") qui gère l'ouverture du menu.
+    menu,   // la box qui s’ouvre avec les ingrédients dedans (la liste des filtres).
+    arrow   // la flèche qui pointe vers le bas ou vers le haut pour indiquer l'ouverture/fermeture.
+}){
+  // Ouvre/ferme le menu au clic sur le bouton
+    button.addEventListener("click", (e) => {
+        e.stopPropagation(); // Empêche la fermeture immédiate
+        button.style.borderRadius = "11px 11px 0 0";
+
+    // Fermer tous les autres menus sauf celui-ci
+    document.querySelectorAll('.search-element-filter').forEach(otherMenu => {
+        if (otherMenu !== menu) {
+        otherMenu.style.display = "none";
+
+        // Réinitialise la flèche des autres filtres en position bas pour dire que s'est fermé
+        const otherArrow = otherMenu.parentElement.querySelector(".dropdown-arrow");
+            if (otherArrow) {
+                otherArrow.classList.remove("fa-angle-up");
+                otherArrow.classList.add("fa-angle-down");
+            }
+
+            // Réinitialise le border-radius des autres boutons de filtre s'ils ont le bon data-role
+            const otherButton = otherMenu.parentElement;
+            if (otherButton && otherButton.dataset.role === 'filter-button') {
+                otherButton.style.borderRadius = '11px';
+            }
+        }
+    });
+
+    // Toggle ouverture/fermeture du menu actuel
+    const isOpen = menu.style.display === "block";
+        menu.style.display = isOpen ? "none" : "block";
+
+        // Toggle de la flèche
+        if (isOpen) {
+            arrow.classList.remove("fa-angle-up");
+            arrow.classList.add("fa-angle-down");
+            button.style.borderRadius = "11px";
+        } else {
+            arrow.classList.remove("fa-angle-down");
+            arrow.classList.add("fa-angle-up");
+        }
+    });
+
+    // Évite la fermeture quand on clique dans le menu
+    menu.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+
+  // Fermer le menu si clic en dehors
+    document.addEventListener("click", (e) => {
+        if (!button.contains(e.target)) {
+            menu.style.display = "none";
+            arrow.classList.remove("fa-angle-up");
+            arrow.classList.add("fa-angle-down");
+            button.style.borderRadius = "11px";
+        }
+    });
+}
+
+
 
 //Fonction pour me permettre de jouer avec les inputs du filter-button et de créer les liste de recherche avec les value
 function dynamicInputForButtonSearchFilter({

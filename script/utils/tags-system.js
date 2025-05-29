@@ -23,14 +23,8 @@ const proxyTags = new Proxy(listeTags, {
     }
 });
 
-// Test : quand la fonction est déclenchée, on log ce qu'on reçoit
-onSelectedTagsChange = (recipe) => {
-    console.log("recette selectionnée:", recipe);   
-}
-
-
+// sert à faire "Quand la liste des tags change, fais ceci…" et s'appelle automatiquement à chaque mise a jour quand on réagit sur un tag qu'il soit add ou remove.
 export const onTagUpdate = (callback) => {
-    console.log("tag rajouté"); // juste pour vérifier que quelqu’un click sur le tag
     onSelectedTagsChange = callback;
 }
 

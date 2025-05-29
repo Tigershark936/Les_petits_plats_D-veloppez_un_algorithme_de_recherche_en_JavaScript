@@ -9,79 +9,178 @@ console.log(recipes);
 
 // Élément HTML qui me sert à contenir la carte de recette affichée dynamiquement gràce au JS
 let containerRecipeCard;
+// Référence globale de l'élément de l'input de recherche principale (header)
+let inputsearchBarHeader;
 
-// Fonction d'affichage des recettes, gère aussi l'affichage du message d'erreur
-function displayRecipes(recipeList, searchValue) {
-  containerRecipeCard.innerHTML = "";
-
-  // MAJ du compteur de recettes ici
-  updateRecipeCounter(recipeList.length); 
-
-  if (recipeList.length === 0) {
-    const errorMessage = document.createElement('p');
-    errorMessage.classList.add('errorMessage');
-    const searchMessage =`«${searchValue}»`;
-    errorMessage.textContent = `⚠️ Aucune recette ne contient ${searchMessage} vous pouvez chercher « tarte aux pommes», «poisson», etc. ⚠️`;
-
-    containerRecipeCard.appendChild(errorMessage);
-    return;
-  }
-
-  recipeList.forEach(recipe => {
-    const card = createRecipeCard(recipe);
-    console.log("Ajout de la carte :", recipe.name);
-    containerRecipeCard.appendChild(card);
-  });
-}
-
-// Initialise toute la structure HTML principale
+// Fonction principale de lancement du site
 function init() {
+
+  // Appel de la fonction du header avec logo, slogan et barre de recherche
+  buildHeader();
+
+  // Création de l'élément <main> qui contiendra tout le contenu principal du site
   const main = document.createElement('main');
   main.classList.add('main');
   main.setAttribute('role', 'main');
   document.body.appendChild(main);
 
-  // Création de la boite des 3 filtres et du compteur des recipes 
-  const containerFiltersAndCounter = document.createElement('div');
-  containerFiltersAndCounter.classList.add('filters-Counter');
-  containerFiltersAndCounter.setAttribute('aria-label', 'Filtres et compteur de recettes du siteWeb');
+  // Création de la zone POUR LE DOM qui regroupe les 3 filtres et le compteur de recettes
+  const containerFiltersAndCounter = createContainerFiltersAndCounter();
   main.appendChild(containerFiltersAndCounter);
+  updateFilterButtons(recipes); // On appelle ici une fois que l'élément est dans le DOM
 
-  const filters = document.createElement('div');
-  filters.classList.add('filters');
-  filters.setAttribute('role', 'group');
-  containerFiltersAndCounter.appendChild(filters);
-
-  // // On injecte ici les 3 boutons de filtres dynamiques et le nombre total de recipes
-  updateFilterButtons(recipes); // affiche les filtres au démarrage
-  containerFiltersAndCounter.appendChild(totalCounterRecipes());
-
-  //Création de la boite des tags
-  const containerTag = document.createElement('div');
-  containerTag.classList.add('container-tag');
+  // Création du conteneur des tags sélectionnés
+  const containerTag = createTagContainer();
   main.appendChild(containerTag);
 
-  // Gestion des tags
+  // Création du conteneur des cartes de recettes affichées
+  containerRecipeCard = createRecipeContainer();
+  main.appendChild(containerRecipeCard);
+
+  // Gestion des tags (ajout / suppression) dans le DOM
   onTagUpdate((tags) => {
+    console.log("tag sélectionné :", tags);
+
     containerTag.innerHTML = "";
     tags.forEach(tag => {
       const tagElement = createTagElement(tag);
       containerTag.appendChild(tagElement);
+      console.log("tag rajouté", tag);
     });
+
+    // FILTRE + MAJ de l'affichage des tags qui sont sélectionnés
     filterAndDisplayRecipes();
   });
 
-  containerRecipeCard = document.createElement('div');
-  containerRecipeCard.classList.add('container-recipe-card');
-  main.appendChild(containerRecipeCard);
-
+  // Affichage initial des recettes
   displayRecipes(recipes, "", []);
 }
 
-// Fonction pour mettre a jour les boutons filtres par rapport au mot clé de la searchbar
+
+//--------------------------------------------------------------
+
+// Fonction pour construire le header du site (logo, slogan, search bar)
+function buildHeader() {
+  // HEARDER
+  const Header = document.createElement('div');
+  Header.classList.add('header');
+  Header.setAttribute('role', 'banner');
+  document.body.appendChild(Header);
+
+  const backgroundHeader = document.createElement('img');
+  backgroundHeader.classList.add('background-img');
+  Header.appendChild(backgroundHeader);
+
+  // H1 LOGO DU SITE 
+  const h1 = document.createElement('h1');
+  const logoWebsite = document.createElement('img');
+  logoWebsite.classList.add('logo');
+  logoWebsite.src = "../assets/icons/Logo.png";
+  logoWebsite.alt = "Logo du site";
+  h1.appendChild(logoWebsite);
+  Header.appendChild(h1);
+
+  // H2 SLOGAN DU HEARDER
+  const sloganHeader = document.createElement('h2');
+  sloganHeader.innerHTML = `CHERCHEZ PARMI PLUS DE 1500 RECETTES <br> DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES`;
+  sloganHeader.classList.add('h2');
+  sloganHeader.setAttribute('aria-label', 'Slogan du site');
+  Header.appendChild(sloganHeader);
+
+  Header.appendChild(createSearchBar());
+}
+
+
+//--------------------------------------------------------------
+
+// Fonction pour créer la barre de recherche avec gestion du champ INPUT du HEADER
+function createSearchBar() {
+  // SEARCH BAR OF HEADER
+  const searchBarHeader = document.createElement('div');
+  searchBarHeader.classList.add('search-bar');
+  searchBarHeader.setAttribute('role', 'search');
+
+  // INPUT DE LA SEARCH BAR
+  const input = document.createElement('input');
+  input.type = "text";
+  input.placeholder = "Rechercher une recette, un ingrédient, ...";
+  input.setAttribute("aria-label", "Barre de recherche");
+  searchBarHeader.appendChild(input);
+
+  inputsearchBarHeader = input; // on le rend accessible au reste du fichier
+
+  // X DU INPUT DE LA SEARCH BAR
+  const clearBtnSearchBarHeader = document.createElement("span");
+  clearBtnSearchBarHeader.classList.add("cross-btn");
+  clearBtnSearchBarHeader.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+  clearBtnSearchBarHeader.style.display = "none";
+  searchBarHeader.appendChild(clearBtnSearchBarHeader);
+
+  input.addEventListener("input", () => {
+    // Gère l'évènement de la croix (X)
+    clearBtnSearchBarHeader.style.display = input.value ? "block" : "none";
+    filterAndDisplayRecipes();
+  });
+
+  clearBtnSearchBarHeader.addEventListener("click", () => {
+    input.value = "";
+    clearBtnSearchBarHeader.style.display = "none";
+    input.focus();
+    filterAndDisplayRecipes();
+  });
+
+  // BOUTON DE LA SEARCH BAR 
+  const buttonSearchBarHeader = document.createElement('button');
+  buttonSearchBarHeader.classList.add('button');
+  buttonSearchBarHeader.setAttribute("aria-label", "Lancer la recherche");
+  searchBarHeader.appendChild(buttonSearchBarHeader);
+
+  const searchIcon = document.createElement('i');
+  searchIcon.classList.add('fa-solid', 'fa-magnifying-glass');
+  buttonSearchBarHeader.appendChild(searchIcon);
+
+  return searchBarHeader;
+}
+
+
+//--------------------------------------------------------------
+
+// Fonction pour créer le container des 3 filtres + le compteur total de recettes
+function createContainerFiltersAndCounter() {
+  const containerFiltersAndCounter = document.createElement('div');
+  containerFiltersAndCounter.classList.add('filters-Counter');
+  containerFiltersAndCounter.setAttribute('aria-label', 'Filtres et compteur de recettes du siteWeb');
+
+  // Création de la boite pour les filters-buttons
+  const containerFilters = document.createElement('div');
+  containerFilters.classList.add('filters');
+  containerFilters.setAttribute('role', 'group');
+  containerFiltersAndCounter.appendChild(containerFilters);
+
+  //supprimé ici : updateFilterButtons(recipes); déplacé dans init()
+  containerFiltersAndCounter.appendChild(totalCounterRecipes());
+
+  return containerFiltersAndCounter;
+}
+
+// Fonction pour créer la boîte contenant les tags actifs
+function createTagContainer() {
+  const containerTag = document.createElement('div');
+  containerTag.classList.add('container-tag');
+  return containerTag;
+}
+
+// Fonction pour créer le container pour les cartes de recettes
+function createRecipeContainer() {
+  const containerRecipeCard = document.createElement('div');
+  containerRecipeCard.classList.add('container-recipe-card');
+  return containerRecipeCard;
+}
+
+// Met à jour les boutons filtres selon les recettes visibles actuellement
 function updateFilterButtons(recipeList) {
-  // Nettoyer les filtres actuels
   const filters = document.querySelector('.filters');
+  // Nettoyer les filtres actuels avant la régénération 
   filters.innerHTML = "";
 
   // Réinjecter les boutons dynamiques avec les recettes filtrées
@@ -91,7 +190,37 @@ function updateFilterButtons(recipeList) {
 }
 
 
-// Fonction pour filtrer en combinant la barre de recherche + les tags
+//--------------------------------------------------------------
+
+// Fonction pour Affiche les recettes, ou LE message d'erreur si aucune trouvée
+function displayRecipes(recipeList, searchValue) {
+  containerRecipeCard.innerHTML = "";
+
+  // Pour chaque carte recipe filtrée, je la crée et je la rajoute au container
+  recipeList.forEach(recipe => {
+    const card = createRecipeCard(recipe);
+    console.log("Ajout de la carte :", recipe.name);
+    containerRecipeCard.appendChild(card);
+  });
+
+  // Condition pour si pas de recipeCard, affichage du message d'erreur
+  if (recipeList.length === 0) {
+    const errorMessage = document.createElement('p');
+    errorMessage.classList.add('errorMessage');
+    const searchMessage = `«${searchValue}»`;
+    errorMessage.textContent = `⚠️ Aucune recette ne contient ${searchMessage} vous pouvez chercher « tarte aux pommes», «poisson», etc. ⚠️`;
+
+    containerRecipeCard.appendChild(errorMessage);
+    return;
+  }
+  // MAJ du compteur de recettes ici
+  updateRecipeCounter(recipeList.length); 
+}
+
+
+//--------------------------------------------------------------
+
+// Fonction pour filtre les recettes selon la searchbar + les tags, puis met à jour l'affichage
 function filterAndDisplayRecipes() {
   const tags = getSelectedTags();
   const searchValue = inputsearchBarHeader.value.trim().toLowerCase();
@@ -112,7 +241,7 @@ function filterAndDisplayRecipes() {
     const recipeUstensils = recipe.ustensils.map(u => u.toLowerCase());
     const recipeAppliance = recipe.appliance.toLowerCase();
 
-    // Séparer les tags selon leur catégorie
+    // Séparer les tags selon leur catégorie filtrée
     const activeIngredients = tags.filter(t => t.category === 'ingredient').map(t => t.name.toLowerCase());
     const activeAppliances = tags.filter(t => t.category === 'appliance').map(t => t.name.toLowerCase());
     const activeUstensils = tags.filter(t => t.category === 'ustensil').map(t => t.name.toLowerCase());
@@ -124,98 +253,13 @@ function filterAndDisplayRecipes() {
     // Vérifie que tous les ustensiles requis sont présents dans la recette
     const matchesUstensils = activeUstensils.every(ust => recipeUstensils.includes(ust));
 
-    // La recette est conservée dans le container si elle remplit toutes les conditions
+    // La recette est conservée dans le container si elle remplit toutes les conditions "texte ET tous les filtres par tags"
     return textMatch && matchesIngredients && matchesAppliance && matchesUstensils;
   });
 
   displayRecipes(filtered, searchValue, tags); // Affiche les recettes lors du chargement
   updateFilterButtons(filtered);
 }
-
-// Fonction qui regroupe les tags sélectionnés en une chaîne visible rangé par catégorie des buttons(ingrédients, appliances, ustensiles), utilisée pour afficher un résumé clair des filtres actifs.
-function formatSelectedTags(tags) {
-  const ing = tags.filter(t => t.category === 'ingredient').map(t => t.name).join(', ');
-  const app = tags.filter(t => t.category === 'appliance').map(t => t.name).join(', ');
-  const ust = tags.filter(t => t.category === 'ustensil').map(t => t.name).join(', ');
-
-  // Ajoute les sections de texte formatées seulement si elles contiennent des valeurs
-  let result = "";
-  if (ing) result += `Ingrédients : ${ing} – `;
-  if (app) result += `Appareil : ${app} – `;
-  if (ust) result += `Ustensiles : ${ust}`;
-
-  return result.trim().replace(/–\s*$/, ''); // retire le dernier tiret si besoin
-}
-
-// Barre d'en-tête et gestion de la barre de recherche
-const Header = document.createElement('div');
-Header.classList.add('header');
-Header.setAttribute('role', 'banner');
-document.body.appendChild(Header);
-
-const backgroundHeader = document.createElement('img');
-backgroundHeader.classList.add('background-img');
-Header.appendChild(backgroundHeader);
-
-//H1 LOGO DU SITE 
-const h1 = document.createElement('h1');
-const logoWebsite = document.createElement('img');
-logoWebsite.classList.add('logo');
-logoWebsite.src = "../assets/icons/Logo.png";
-logoWebsite.alt = "Logo du site";
-h1.appendChild(logoWebsite);
-Header.appendChild(h1);
-
-// H2 SLOGAN DU HEARDER
-const sloganHeader = document.createElement('h2');
-sloganHeader.innerHTML = `CHERCHEZ PARMI PLUS DE 1500 RECETTES <br> DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES`;
-sloganHeader.classList.add('h2');
-sloganHeader.setAttribute('aria-label', 'Slogan du site');
-Header.appendChild(sloganHeader);
-
-// INPUT DE LA SEARCH BAR
-const searchBarHeader = document.createElement('div');
-searchBarHeader.classList.add('search-bar');
-searchBarHeader.setAttribute('role', 'search');
-Header.appendChild(searchBarHeader);
-
-// INPUT DE LA SEARCH BAR
-const inputsearchBarHeader = document.createElement('input');
-inputsearchBarHeader.type = "text";
-inputsearchBarHeader.placeholder = "Rechercher une recette, un ingrédient, ...";
-inputsearchBarHeader.setAttribute("aria-label", "Barre de recherche");
-searchBarHeader.appendChild(inputsearchBarHeader);
-
-inputsearchBarHeader.addEventListener("input", () => {
-  // Gère l'évènement de la croix (X)
-  clearBtnSearchBarHeader.style.display = inputsearchBarHeader.value ? "block" : "none";
-  filterAndDisplayRecipes();
-});
-
-// X DU INPUT DE LA SEARCH BAR
-const clearBtnSearchBarHeader = document.createElement("span");
-clearBtnSearchBarHeader.classList.add("cross-btn");
-clearBtnSearchBarHeader.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
-clearBtnSearchBarHeader.style.display = "none";
-searchBarHeader.appendChild(clearBtnSearchBarHeader);
-
-clearBtnSearchBarHeader.addEventListener("click", () => {
-  inputsearchBarHeader.value = "";
-  clearBtnSearchBarHeader.style.display = "none";
-  inputsearchBarHeader.focus();
-  filterAndDisplayRecipes();
-});
-
-// BOUTON DE LA SEARCH BAR 
-const buttonSearchBarHeader = document.createElement('button');
-buttonSearchBarHeader.classList.add('button');
-buttonSearchBarHeader.setAttribute("aria-label", "Lancer la recherche");
-searchBarHeader.appendChild(buttonSearchBarHeader);
-
-// LOGO DU BOUTON DE LA SEARCH BAR
-const searchIcon = document.createElement('i');
-searchIcon.classList.add('fa-solid', 'fa-magnifying-glass');
-buttonSearchBarHeader.appendChild(searchIcon);
 
 init();
 console.log("PageWeb initialisée avec succès !");
