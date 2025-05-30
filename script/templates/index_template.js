@@ -64,11 +64,11 @@ function buildHeader() {
   // HEARDER
   const Header = document.createElement('div');
   Header.classList.add('header');
-  Header.setAttribute('role', 'banner');
   document.body.appendChild(Header);
 
   const backgroundHeader = document.createElement('img');
   backgroundHeader.classList.add('background-img');
+  backgroundHeader.setAttribute('role', 'banner');
   Header.appendChild(backgroundHeader);
 
   // H1 LOGO DU SITE 
@@ -163,12 +163,18 @@ function createContainerFiltersAndCounter() {
   return containerFiltersAndCounter;
 }
 
-// Fonction pour créer la boîte contenant les tags actifs
+
+//--------------------------------------------------------------
+
+// Fonction pour créer le container des les tags actifs
 function createTagContainer() {
   const containerTag = document.createElement('div');
   containerTag.classList.add('container-tag');
   return containerTag;
 }
+
+
+//--------------------------------------------------------------
 
 // Fonction pour créer le container pour les cartes de recettes
 function createRecipeContainer() {
@@ -176,6 +182,9 @@ function createRecipeContainer() {
   containerRecipeCard.classList.add('container-recipe-card');
   return containerRecipeCard;
 }
+
+
+//--------------------------------------------------------------
 
 // Met à jour les boutons filtres selon les recettes visibles actuellement
 function updateFilterButtons(recipeList) {
