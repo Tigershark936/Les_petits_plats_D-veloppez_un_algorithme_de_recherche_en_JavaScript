@@ -231,43 +231,102 @@ function displayRecipes(recipeList, searchValue) {
 
 // Fonction pour filtre les recettes selon la searchbar + les tags, puis met à jour l'affichage
 function filterAndDisplayRecipes() {
-  const tags = getSelectedTags();
-  const searchValue = inputsearchBarHeader.value.trim().toLowerCase();
+  const tags = getSelectedTags(); // Récupère les tags actifs (ingrédients, ustensiles, appareil)
+  const searchValue = inputsearchBarHeader.value.trim().toLowerCase(); // Récupère la valeur de l'input principal.
 
-  const filtered = recipes.filter(recipe => {
-    // Filtrage par texte
-    // - le nom de la recette 
-    const isInTitle = recipe.name.toLowerCase().includes(searchValue);
-    // - la description
-    const isInDescription = recipe.description.toLowerCase().includes(searchValue);
-    // -teste si au moins un élément du tableau passe un des ingrédients puis me retourne un boolean pour sa présence
-    const isInIngredients = recipe.ingredients.some(ing => ing.ingredient.toLowerCase().includes(searchValue));
-    // Vérifie mes conditions si une recette correspond à la recherche de l'utilisateur. (contient moins de 3 caractères OU le texte est présent dans le titre OU dans la description OU dans les ingrédients)
-    const textMatch = searchValue.length < 3 || isInTitle || isInDescription || isInIngredients;
+  // Tableau final contenant les recettes filtrées
+  let filteredRecipes = [];
 
-    // Filtrage par tags
-    const recipeIngredients = recipe.ingredients.map(i => i.ingredient.toLowerCase());
-    const recipeUstensils = recipe.ustensils.map(u => u.toLowerCase());
+  // Boucle principale sur toutes les recettes du tableau
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+    const title = recipe.name.toLowerCase();
+    const description = recipe.description.toLowerCase();
+    console.log(`Recette analysée : ${recipe.name}`); // Suivi de la recette en cours
+
+    // Vérifie si un ingrédient contient la recherche
+    let foundInIngredients = false;
+    for (let j = 0; j < recipe.ingredients.length; j++) {
+      const ingredient = recipe.ingredients[j].ingredient.toLowerCase();
+      if (ingredient.includes(searchValue)) {
+        foundInIngredients = true;
+        console.log(`ingrédient trouvé: "${ingredient}" dans la ${recipe.name}`);
+        break;
+      }
+    }
+
+    // Vérifie si le titre ou la description matchent la recherche
+    const isInTitle = title.includes(searchValue);
+    const isInDescription = description.includes(searchValue);
+
+    // Condition : testmatch si texte < 3 caractères ou s’il est trouvé dans un des 3 champs
+    const textMatch = searchValue.length < 3 || isInTitle || isInDescription || foundInIngredients;
+
+
+    // Filtrage par tags avec des tableaux (ingredients / ustensils / appliance)
+    const recipeIngredients = [];
+    for (let j = 0; j < recipe.ingredients.length; j++) {
+      recipeIngredients.push(recipe.ingredients[j].ingredient.toLowerCase());
+    }
+
+    const recipeUstensils = [];
+    for (let j = 0; j < recipe.ustensils.length; j++) {
+      recipeUstensils.push(recipe.ustensils[j].toLowerCase());
+    }
+
     const recipeAppliance = recipe.appliance.toLowerCase();
 
-    // Séparer les tags selon leur catégorie filtrée
-    const activeIngredients = tags.filter(t => t.category === 'ingredient').map(t => t.name.toLowerCase());
-    const activeAppliances = tags.filter(t => t.category === 'appliance').map(t => t.name.toLowerCase());
-    const activeUstensils = tags.filter(t => t.category === 'ustensil').map(t => t.name.toLowerCase());
+    
+    // Trie les tags actifs selon leur type
+    const activeIngredients = [];
+    const activeAppliances = [];
+    const activeUstensils = [];
 
-    // Vérifie que tous les tags d'ingrédients sont présents dans la recette
-    const matchesIngredients = activeIngredients.every(ing => recipeIngredients.includes(ing));
-    // Vérifie que la recette utilise l'appareil sélectionné (ou ignore si aucun tag d'appareil actif)
-    const matchesAppliance = activeAppliances.length === 0 || activeAppliances.includes(recipeAppliance);
-    // Vérifie que tous les ustensiles requis sont présents dans la recette
-    const matchesUstensils = activeUstensils.every(ust => recipeUstensils.includes(ust));
+    // Parcourt tous les tags sélectionnés par l’utilisateur
+    for (let j = 0; j < tags.length; j++) {
+      const tag = tags[j];
+      const name = tag.name.toLowerCase();
+      // Si c'est une catégorie "...", ajoute-le à la liste des "..." actifs
+      if (tag.category === 'ingredient') activeIngredients.push(name);
+      if (tag.category === 'appliance') activeAppliances.push(name);
+      if (tag.category === 'ustensil') activeUstensils.push(name);
+    }
 
-    // La recette est conservée dans le container si elle remplit toutes les conditions "texte ET tous les filtres par tags"
-    return textMatch && matchesIngredients && matchesAppliance && matchesUstensils;
-  });
+    // Vérifie que tous les tags ingrédients sont présents dans la recette
+    let matchesIngredients = true;
+    for (let j = 0; j < activeIngredients.length; j++) {
+      if (!recipeIngredients.includes(activeIngredients[j])) {
+        matchesIngredients = false;
+        break;
+      }
+    }
 
-  displayRecipes(filtered, searchValue, tags); // Affiche les recettes lors du chargement
-  updateFilterButtons(filtered);
+    // Vérifie que l’appareil électroménager corresponds au moins un tag sélectionné
+    let matchesAppliance = activeAppliances.length === 0;
+    for (let j = 0; j < activeAppliances.length; j++) {
+      if (activeAppliances[j] === recipeAppliance) {
+        matchesAppliance = true;
+        break;
+      }
+    }
+
+    // Vérifie que tous les ustensiles sélectionnés sont bien dans la recette
+    let matchesUstensils = true;
+    for (let j = 0; j < activeUstensils.length; j++) {
+      if (!recipeUstensils.includes(activeUstensils[j])) {
+        matchesUstensils = false;
+        break;
+      }
+    }
+
+    // Si la ou les recette(s) correspond à la recherche principale ET tous les tags → on l’ajoute
+    if (textMatch && matchesIngredients && matchesAppliance && matchesUstensils) {
+      filteredRecipes.push(recipe);
+      console.log(`Recette gardé : ${recipe.name}`);
+    }
+  }
+  displayRecipes(filteredRecipes, searchValue, tags);
+  updateFilterButtons(filteredRecipes);
 }
 
 init();
